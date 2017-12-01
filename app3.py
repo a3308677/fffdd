@@ -166,8 +166,7 @@ def handle_message(event):
             preview_image_url='http://i.imgur.com/hYL5v.jpg'
         )
         line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=googlei(event.message.text[5:],1)[0]))
+            event.reply_token,image_message)
         return 0
     if event.message.text.index('goo-',0,len(event.message.text))==0:    
         line_bot_api.reply_message(
