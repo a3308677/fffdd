@@ -156,10 +156,11 @@ def googlei(query,n):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    line_bot_api.reply_message(
-        event.reply_token,
-        TextSendMessage(text=event.message.text))
-    line_bot_api.push_message(to, TextSendMessage(text='Hello World!'))
+    if event.message.text=='吃屎':    
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=event.message.text))
+        return 0
     if event.message.text.index('goo-',0,len(event.message.text))==0:    
         line_bot_api.reply_message(
             event.reply_token,
