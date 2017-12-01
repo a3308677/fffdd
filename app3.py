@@ -159,11 +159,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text))
         return 0
-    if event.message.text.index('goo-',0,len(event.message.text))==0:    
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=googles(event.message.text[4:])))
-        return 0
+    
     if event.message.text=='吃': 
         image_message = ImageSendMessage(
             original_content_url='https://i.imgur.com/xQF5dZT.jpg',
@@ -171,6 +167,11 @@ def handle_message(event):
         )
         line_bot_api.reply_message(
             event.reply_token, image_message)
+        return 0
+    if event.message.text.index('goo-',0,len(event.message.text))==0:    
+        line_bot_api.reply_message(
+            event.reply_token,
+            TextSendMessage(text=googles(event.message.text[4:])))
         return 0
 
 import os
