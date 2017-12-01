@@ -36,10 +36,8 @@ from linebot import (
 from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import (
-    MessageEvent, TextMessage, TextSendMessage,
-)
 from linebot.models import *
+
 app = Flask(__name__)
 
 line_bot_api = LineBotApi('1SmGKlg59CG8VNJQFGSRoHhUbbbtYnyoePC0S3DfEbZkYS0kKfueCEYNQz6L/zPbywLbATf1H6BAWnr+K2Ii5U8Bf5JddLN8LklJ/E74wgS6LP3I4cYTEeNVIPE2vu79qBdsaIwxRfzlkFocAWmIzAdB04t89/1O/w1cDnyilFU=')
@@ -166,7 +164,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=googles(event.message.text[4:])))
         return 0
-    if event.message.text.index('gooi-',0,len(event.message.text))==0:  
+    if event.message.text=='吃': 
         image_message = ImageSendMessage(
             original_content_url='https://i.imgur.com/xQF5dZT.jpg',
             preview_image_url='https://i.imgur.com/xQF5dZT.jpg'
