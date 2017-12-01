@@ -168,11 +168,9 @@ def handle_message(event):
         return 0
     if event.message.text.index('gooi-',0,len(event.message.text))==0:  
         image_message = ImageSendMessage(
-            original_content_url=googlei(event.message.text[5:],1)[1],
-            preview_image_url=googlei(event.message.text[5:],1)[1]
+            original_content_url='http://old.bz55.com/uploads/allimg/140407/1-14040G05Q7.jpg',
+            preview_image_url='http://old.bz55.com/uploads/allimg/140407/1-14040G05Q7.jpg'
         )
-        print(googlei(event.message.text[5:],1)[1])
-        print('hhhhh')
         line_bot_api.reply_message(
             event.reply_token, image_message)
         return 0
