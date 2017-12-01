@@ -171,6 +171,8 @@ def handle_message(event):
             original_content_url=googlei(event.message.text[5:],1)[1],
             preview_image_url=googlei(event.message.text[5:],1)[1]
         )
+        print(googlei(event.message.text[5:],1)[1])
+        print('hhhhh')
         line_bot_api.reply_message(
             event.reply_token, image_message)
         return 0
