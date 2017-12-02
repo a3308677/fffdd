@@ -187,12 +187,16 @@ def handle_message(event):
         return 0
     if event.message.text.startswith('gooim-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],3)
-        image_message = ImageSendMessage(
-            original_content_url=ss[0],
-            preview_image_url=ss[0]
-        )
-        line_bot_api.reply_message(
-            event.reply_token,image_message)
+        image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        image_message2 = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        image_message3 = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        image_message4 = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        image_message5 = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        line_bot_api.reply_message(event.source.user_id,,image_message)
+        line_bot_api.reply_message(event.source.user_id,,image_message2)
+        line_bot_api.reply_message(event.source.user_id,,image_message3)
+        line_bot_api.reply_message(event.source.user_id,,image_message4)
+        line_bot_api.reply_message(event.source.user_id,,image_message5)
         return 0
     if event.message.text.startswith('gooih-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],4)
