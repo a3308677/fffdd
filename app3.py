@@ -170,7 +170,7 @@ def handle_message(event):
     if event.message.text.startswith('gooi-',0,len(event.message.text))==1:  
         image_message = ImageSendMessage(
             original_content_url=googlei(event.message.text[5:],1)[0],
-            preview_image_url=original_content_url
+            preview_image_url=googlei(event.message.text[5:],1)[1]
         )
         line_bot_api.reply_message(
             event.reply_token,image_message)
