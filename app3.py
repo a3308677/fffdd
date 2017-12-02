@@ -167,7 +167,7 @@ def handle_message(event):
             TextSendMessage(text=event.message.text))
         return 0
     
-    if event.message.text.startswith('gooi-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[5:],1)
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[1],preview_image_url=ss[1]))
@@ -175,7 +175,7 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[3],preview_image_url=ss[3]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[4],preview_image_url=ss[4]))
         return 0
-    if event.message.text.startswith('gooil-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooil-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],2)
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[1],preview_image_url=ss[1]))
@@ -183,7 +183,7 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[3],preview_image_url=ss[3]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[4],preview_image_url=ss[4]))
         return 0
-    if event.message.text.startswith('gooim-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooim-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],3)
         #image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0]))
@@ -192,7 +192,7 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[3],preview_image_url=ss[3]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[4],preview_image_url=ss[4]))
         return 0
-    if event.message.text.startswith('gooih-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooih-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],4)
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[1],preview_image_url=ss[1]))
@@ -200,7 +200,7 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[3],preview_image_url=ss[3]))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[4],preview_image_url=ss[4]))
         return 0
-    if event.message.text.startswith('goo-',0,len(event.message.text))==1:    
+    if event.message.text.lower().startswith('goo-',0,len(event.message.text))==1:    
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[4:])))
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[4:])))
         return 0
