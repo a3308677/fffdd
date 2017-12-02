@@ -100,9 +100,10 @@ def googles(query):
         b5 = bytearray()
         b5.extend(map(ord, c4))
         L[i]=b5.decode('utf-8')
-        L3+=(L[i]+'\n'+L2[i]+'\n'+'\n')
+        
         s5=s4
         i+=1 
+    L3=(L[0]+'\n'+L2[0]+'\n'+'\n'+L[1]+'\n'+L2[1]+'\n'+'\n'+L[2]+'\n'+L2[2]+'\n'+'\n'+L[3]+'\n'+L2[3]+'\n'+'\n'+L[4]+'\n'+L2[4])    
     return (L3)
 
 #url = "https://www.google.com.tw/search?hl=zh-TW&q=%E4%BA%9E%E8%8E%89%E4%BA%9E&meta=&aq=f&oq=%22"
