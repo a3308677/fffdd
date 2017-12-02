@@ -176,6 +176,33 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,image_message)
         return 0
+    if event.message.text.startswith('gooil-',0,len(event.message.text))==1: 
+        ss=googlei(event.message.text[6:],2)
+        image_message = ImageSendMessage(
+            original_content_url=ss[0],
+            preview_image_url=ss[0]
+        )
+        line_bot_api.reply_message(
+            event.reply_token,image_message)
+        return 0
+    if event.message.text.startswith('gooim-',0,len(event.message.text))==1: 
+        ss=googlei(event.message.text[6:],3)
+        image_message = ImageSendMessage(
+            original_content_url=ss[0],
+            preview_image_url=ss[0]
+        )
+        line_bot_api.reply_message(
+            event.reply_token,image_message)
+        return 0
+    if event.message.text.startswith('gooih-',0,len(event.message.text))==1: 
+        ss=googlei(event.message.text[6:],4)
+        image_message = ImageSendMessage(
+            original_content_url=ss[0],
+            preview_image_url=ss[0]
+        )
+        line_bot_api.reply_message(
+            event.reply_token,image_message)
+        return 0
     if event.message.text.startswith('goo-',0,len(event.message.text))==1:    
         line_bot_api.reply_message(
             event.reply_token,
