@@ -141,13 +141,20 @@ def googlei(query,n):
           set()
 
     link_list3= [None] * 100
+    link_list4= [None] * 100
     i = 0
     for var in link_list:
         if var.endswith(".jpg",0,len(var)) or var.endswith(".png",0,len(var)) :
             link_list3[i]=var
             i+=1
+    link_list3=list(filter(None, link_list3))  
+    i = 0
+    for var in link_list3:
+        if var.startswith("https",0,len(var)):
+            link_list4[i]=var
+            i+=1
 
-    x=list(filter(None, link_list3))    
+    x=list(filter(None, link_list4))    
     random.shuffle(x)    
     return x
 
@@ -160,15 +167,15 @@ def handle_message(event):
             TextSendMessage(text=event.message.text))
         return 0
     
-    if event.message.text.index('gooi-',0,len(event.message.text))==0:  
+    if event.message.text.startswith('gooi-',0,len(event.message.text))==1:  
         image_message = ImageSendMessage(
-            original_content_url='http://i.imgur.com/hYL5v.jpg',
-            preview_image_url='http://i.imgur.com/hYL5v.jpg'
+            original_content_url=googlei(event.message.text[5:],1)[0],
+            preview_image_url=googlei(event.message.text[5:],1)[0]
         )
         line_bot_api.reply_message(
             event.reply_token,image_message)
         return 0
-    if event.message.text.index('goo-',0,len(event.message.text))==0:    
+    if event.message.text.startswith('goo-',0,len(event.message.text))==1:    
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=googles(event.message.text[4:])))
