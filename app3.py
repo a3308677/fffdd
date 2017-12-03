@@ -167,7 +167,10 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text=event.message.text))
         return 0
-    
+    if event.message.text=='11':    
+        tt='https://i.pximg.net/img-original/img/2017/11/25/20/38/13/66037612_p0.jpg'
+        line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=tt,preview_image_url=tt))
+        return 0
     if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[5:],1)
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0]))
