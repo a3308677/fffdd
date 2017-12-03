@@ -169,8 +169,8 @@ def handle_message(event):
         return 0
     if event.message.text=='11':    
         tt='https://i.pximg.net/img-original/img/2017/11/25/20/38/13/66037612_p0.jpg'
-        t2='https://i.pximg.net/img-master/img/2017/12/03/16/25/11/66143059_p0_master1200.jpg'
-        t3='https://i.pximg.net/img-original/img/2017/12/03/15/58/27/66142747_p0.jpg'
+        t2='https://i.pximg.net/img-original/img/2017/12/03/19/40/52/66145866_p0.png'
+        t3='https://i.pximg.net/c/600x600/img-master/img/2017/12/03/19/40/52/66145866_p0_master1200.jpg'
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=tt,preview_image_url=tt))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=t2,preview_image_url=t2))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=t3,preview_image_url=t3))
