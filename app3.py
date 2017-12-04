@@ -166,7 +166,7 @@ def handle_message(event):
     if event.message.text=='吃屎':    
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text='str(multiprocessing.cpu_count())'))
+            TextSendMessage(text=str(multiprocessing.cpu_count())))
         return 0
     if event.message.text=='11':    
         tt='https://dl.dropboxusercontent.com/content_link/fxUa4NG3YlKD2UlGM7TMA9dcj1M9DRGyjM0k2VOwpMEcReaUydn63UOzz0h1GK5N/file'
