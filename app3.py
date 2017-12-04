@@ -168,7 +168,7 @@ def handle_message(event):
             TextSendMessage(text=event.message.text))
         return 0
     if event.message.text=='11':    
-        tt='https://i.pximg.net/img-original/img/2017/11/25/20/38/13/66037612_p0.jpg'
+        tt='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png'
         t2='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png?dl=0'
         t3='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png?dl=0.png'
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=tt,preview_image_url=tt))
