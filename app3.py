@@ -168,8 +168,8 @@ def handle_message(event):
             TextSendMessage(text=event.message.text))
         return 0
     if event.message.text=='11':    
-        tt='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png'
-        t2='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png?dl=0'
+        tt='https://dl.dropboxusercontent.com/content_link/fxUa4NG3YlKD2UlGM7TMA9dcj1M9DRGyjM0k2VOwpMEcReaUydn63UOzz0h1GK5N/file'
+        t2='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png?raw=1'
         t3='https://www.dropbox.com/s/0fejzzwu4q0pv7c/12ff3.png?dl=0.png'
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=tt,preview_image_url=tt))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=t2,preview_image_url=t2))
