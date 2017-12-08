@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf8 -*-
+from __future__ import print_function
 from selenium import webdriver
 import urllib.parse
 from bs4 import BeautifulSoup
@@ -29,7 +30,6 @@ import re
 import logging
 import multiprocessing
 
-from __future__ import print_function
 import httplib2
 import os
 from apiclient import discovery
