@@ -45,7 +45,7 @@ except ImportError:
 # If modifying these scopes, delete your previously saved credentials
 # at ~/.credentials/drive-python-quickstart.json
 SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly'
-CLIENT_SECRET_FILE = '{"installed":{"client_id":"29928377405-f8j8p2kkn4fk8856hd5qg7k3v00pal2h.apps.googleusercontent.com","project_id":"our-vigil-188404","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://accounts.google.com/o/oauth2/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"LhO_qlC6GDUCPCk-qQn_3YeD","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}'
+CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Drive API Python Quickstart'
 
 def get_credentials():
