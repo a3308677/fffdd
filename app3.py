@@ -286,23 +286,23 @@ def handle_message(event):
     if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[5:],1)
         for i in range(0,3):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[i]))
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
     if event.message.text.lower().startswith('gooil-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],2
         for i in range(0,3):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[i]))
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
     if event.message.text.lower().startswith('gooim-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],3)
         #image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
         for i in range(0,3):           
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[i]))       
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))       
         return 0
     if event.message.text.lower().startswith('gooih-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[6:],4)
         for i in range(0,3):           
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[i]))
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
     if event.message.text.lower().startswith('goo-',0,len(event.message.text))==1:    
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[4:])))
