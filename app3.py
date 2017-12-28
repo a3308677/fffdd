@@ -10,7 +10,7 @@ import lxml
 import urllib.request
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-from bs4 import BeautifulSoup
+
 from selenium.webdriver.common.keys import Keys
 import json
 import os
@@ -29,13 +29,113 @@ from selenium.webdriver.common.keys import Keys
 import re
 import logging
 import multiprocessing
+import dropbox
 
 import httplib2
 import os
 from apiclient import discovery
 
+##############################################################
+dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
+url_host = 'http://www.pixiv.net/'
+url_login = 'https://accounts.pixiv.net/login'
+url_post = 'https://accounts.pixiv.net/api/login'
+headers_default = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+
+    #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24'
+}
+s = requests.Session()
+    # 访问登陆页，获取Cookie和post_key
+print('Visiting %s...' % url_login)
+r = s.get(url_login, headers=headers_default)
+
+print('Done結束.')
+#print('Cookie:', s.cookies)
+soup = BeautifulSoup(r.text, "html.parser")
+post_key = soup.find(id="old-login").find(attrs={'name': 'post_key'}).get('value')
+#print('post_key:', post_key)
+
+# 登陆
+data_post = {
+        'mode': 'login',
+        'pixiv_id': 'a2304101',
+        'password': 'johnny782',
+        'post_key': post_key
+}
+print('Logining中...')
+
+r = s.post(url_post, data=data_post, headers=headers_default)
+
+def DownloadFile(referer):
+        referer2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+referer
+        #dir_='D:/Dropbox/pixiv2/'+keyword+'/'
+        dir2_='/pixiv3/'
+        '''
+        try:
+            if not os.path.exists(dir_):
+                os.mkdir(dir_)
+            elif os.path.isfile(dir_):
+                raise Exception("failed to create directory '%s'" % dir_)
+        except:
+                print('mkdir造成失敗')
+        '''
+        indent='\t'
+        headers = headers_default.copy()
+        headers['Referer'] = referer2
+    
+    
+        try:
+            
+            r = s.get(referer2,headers=headers_default)    
+        
+            
+            findx=re.findall('https://i.pximg.net/img-original(.*?)"', r.text)
+            #print(referer2)
+            url= ( 'https://i.pximg.net/img-original'+findx[0])
+            #print(referer2)
+            #print(url)
+            #dir_='PixivBookmarkCrawler/'       
+            #file = dir_+str(rank)+'-'+ str(referer)+'-'+star+'.jpg'
+            #file = dir_+star+'-'+str(referer)+'.jpg'
+            #print('%sdownloading' % indent, file)
+            r = s.get(url, headers=headers)
+            
+
+            file_to = dir2_+ str(referer)+'.jpg'
+            #file_to = dir2_+star+'-'+url[len(url)-15:len(url)-7]+'-'+'.jpg'
+            #file_to = url[len(url)-15:len(url)-7]+'.jpg'
+            #print(url[len(url)-15:len(url)-7])
+        
+            x_time = time.time()
+            dbx.files_upload(r.content, file_to)
+            y_time = time.time()
+            #print(y_time-x_time)
+
+            x_time = time.time()
+            link = dbx.sharing_create_shared_link(file_to)            
+            url = link.url
+            y_time = time.time()
+            #print(y_time-x_time)
+
+            return (url[0:len(url)-4]+'raw=1')
+            #Write(file, r.content)
+            print(y_time-x_time)
+        except:
+            print('失敗到album')
+       
+        
+            #result = dbx.files_get_temporary_link('/'+url[len(url)-15:len(url)-7]+'.jpg')
+            #link = dbx.sharing_create_shared_link('/'+str(rank)+'-'+ url[len(url)-15:len(url)-7]+'-'+star+'.jpg')
+            #url = link.url
+            #print(url[0:len(url)-4]+'raw=1')
+   
+            #print('/'+url[len(url)-15:len(url)-7]+'.jpg')
+            #print('%sdone' % indent)
+            #return str(url[0:len(url)-4]+'raw=1')
 
 
+##############################################################
 from flask import Flask, request, abort
 
 from linebot import (
@@ -177,10 +277,11 @@ def handle_message(event):
             TextSendMessage(text='吃屎'))
         return 0
     if event.message.text=='11':    
-        tt='https://dl.dropboxusercontent.com/content_link/fxUa4NG3YlKD2UlGM7TMA9dcj1M9DRGyjM0k2VOwpMEcReaUydn63UOzz0h1GK5N/file'
- 
-        line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=tt,preview_image_url=tt))
-        
+        keyword='オリジナル'
+        r = requests.get("https://www.pixiv.net/search.php?word="+keyword+"&s_mode=s_tag_full&order=popular_male_d&mode=r18&p="+str(random.choice([1,2,3])))
+        link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
+        x=DownloadFile(random.choice(link_list))
+        line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
         return 0
     if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[5:],1)
