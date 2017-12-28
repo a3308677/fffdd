@@ -289,7 +289,7 @@ def handle_message(event):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
     if event.message.text.lower().startswith('gooil-',0,len(event.message.text))==1: 
-        ss=googlei(event.message.text[6:],2
+        ss=googlei(event.message.text[6:],2)
         for i in range(0,3):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
