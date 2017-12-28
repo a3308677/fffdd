@@ -67,6 +67,16 @@ print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
 
+def Write(file, content):
+    if isinstance(content, bytes):
+        with open(file, 'wb') as f:
+            f.write(content)
+    elif isinstance(content, str):
+        with open(file, 'w', encoding='utf-8') as f:
+            f.write(content)
+    else:
+        raise TypeError
+        
 def DownloadFile(referer):
         referer2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+referer
         #dir_='D:/Dropbox/pixiv2/'+keyword+'/'
@@ -117,7 +127,7 @@ def DownloadFile(referer):
             url = link.url
             y_time = time.time()
             #print(y_time-x_time)
-
+            Write('/', r.content)
             return (url[0:len(url)-4]+'raw=1')
             #Write(file, r.content)
             print(y_time-x_time)
