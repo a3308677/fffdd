@@ -276,11 +276,14 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='吃屎'))
         return 0
-    if event.message.text=='11':    
+    if event.message.text=='11':
+        x_time = time.time()
         keyword='オリジナル'
         r = requests.get("https://www.pixiv.net/search.php?word="+keyword+"&s_mode=s_tag_full&order=popular_male_d&mode=r18&p="+str(random.choice([1,2,3])))
         link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
         x=DownloadFile(random.choice(link_list))
+        y_time = time.time()
+        line_bot_api.push_message(event.source.user_id,TextSendMessage(text=str(y_time-x_time)))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
         return 0
     if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
