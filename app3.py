@@ -275,6 +275,10 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='吃屎'))
+        line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
+        line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://mega.nz/#!IIQk3ZCA','https://mega.nz/#!IIQk3ZCA'))
+        line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://mega.nz/#!IIQk3ZCA!FLOQH30n53FpYxIwNhu2jabQgurqjM8Q_nD92hslQ6w','https://mega.nz/#!IIQk3ZCA!FLOQH30n53FpYxIwNhu2jabQgurqjM8Q_nD92hslQ6w'))
+        
         return 0
     if event.message.text=='11':
         x_time = time.time()
@@ -284,8 +288,7 @@ def handle_message(event):
         x=DownloadFile(random.choice(link_list))
         y_time = time.time()
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text=str(y_time-x_time)))
-        line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
-        return 0
+return 0
     if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
         ss=googlei(event.message.text[5:],1)
         for i in range(0,3):
