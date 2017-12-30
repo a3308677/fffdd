@@ -276,7 +276,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='吃屎'))
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'),data1=None)
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'))
+        
         line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://mega.nz/#!IIQk3ZCA!FLOQH30n53FpYxIwNhu2jabQgurqjM8Q_nD92hslQ6w','https://mega.nz/#!IIQk3ZCA!FLOQH30n53FpYxIwNhu2jabQgurqjM8Q_nD92hslQ6w'))
         
         return 0
