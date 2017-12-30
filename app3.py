@@ -276,7 +276,7 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='吃屎'))
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'),data1=None)
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'))        
+              
         line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://pixiv.cat/66282266.jpg','https://pixiv.cat/66282266.jpg'))
         
         return 0
