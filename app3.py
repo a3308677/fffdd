@@ -138,13 +138,13 @@ def DownloadFile(referer):
 ##############################################################
 from flask import Flask, request, abort
 
-from linebot import (
+from linebot2 import (
     LineBotApi, WebhookHandler
 )
-from linebot.exceptions import (
+from linebot2.exceptions import (
     InvalidSignatureError
 )
-from linebot.models import *
+from linebot2.models import *
 
 app = Flask(__name__)
 
