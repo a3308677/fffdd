@@ -31,10 +31,5 @@ google-api-python-client==1.6.4
 httplib2==0.10.3
 oauth2client==4.1.2
 dropbox==8.5.1
-line-bot-sdk123456==1.5.0
-line_bot_sdk333333==1.5.0
-line-bot-sdk444444==1.5.0
-line-bot-sdk555555==1.5.0
-line-bot-sdk666666==1.5.0
-line-bot-sdk777777==1.5.0
-line-bot-sdk8==1.5.0
+gg1122==1.5.0
+
