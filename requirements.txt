@@ -35,3 +35,4 @@ line-bot-sdk123456==1.5.0
 line_bot_sdk333333==1.5.0
 line-bot-sdk444444==1.5.0
 line-bot-sdk555555==1.5.0
+line-bot-sdk666666==1.5.0
