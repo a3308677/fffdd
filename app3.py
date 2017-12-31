@@ -408,8 +408,6 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='吃屎'))
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'),data1=None)
-        line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://pixiv.cat/66282266.jpg','https://pixiv.cat/66282266.jpg'))
         return 0
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
@@ -480,30 +478,30 @@ def handle_message(event):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(girlresult[i],girlresult[i]))        
         return 0
 ######################################################################
-    if event.message.text.lower().startswith('gooi-')==True: 
-        ss=googlei(event.message.text[5:],1)
+    if event.message.text.lower().startswith('gi-')==True: 
+        ss=googlei(event.message.text[3:],1)
         for i in range(0,3):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('gooil-')==True: 
-        ss=googlei(event.message.text[6:],2)
+    if event.message.text.lower().startswith('gil-')==True: 
+        ss=googlei(event.message.text[4:],2)
         for i in range(0,3):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('gooim-')==True: 
-        ss=googlei(event.message.text[6:],3)
+    if event.message.text.lower().startswith('gim-')==True: 
+        ss=googlei(event.message.text[4:],3)
         #image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
         for i in range(0,3):           
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))       
         return 0
-    if event.message.text.lower().startswith('gooih-')==True: 
-        ss=googlei(event.message.text[6:],4)
+    if event.message.text.lower().startswith('gih-')==True: 
+        ss=googlei(event.message.text[4:],4)
         for i in range(0,3):           
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('goo-')==True:    
+    if event.message.text.lower().startswith('gs-')==True:    
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[4:])))
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[4:])))
+        line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
 
 import os
