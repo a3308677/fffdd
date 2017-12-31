@@ -137,7 +137,7 @@ def DownloadFile(referer):
 
 ##############################################################
 def pixivsearch(string):
-    try:
+   
         url='https://www.pixiv.net/search.php?s_mode=s_tag&order=popular'
         string=(string+'-').lower()
         keyword=(re.findall('p-s(.*?)-', string))[0]
@@ -168,23 +168,21 @@ def pixivsearch(string):
         
         #url='https://www.pixiv.net/search.php?s_mode=s_tag&order=popular'+sex+'_d'+r18+'&word='+keyword+'&p='+page
         return [url,item]
-    except:
-        return [0,0]
+    
 
 def itemsellectid(url):
-    try:
+    
         r = s.get(url)
         link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
         if item!=[]:
             return link_list[int(item)-1]
         else:
             return random.choice(link_list)
-    except:
-        return 0
+    
     
 def resulturl(itemsellect):
     
-    try:
+   
         resulturl=[]
         url2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+itemsellect
         r2 = s.get(url2)
@@ -198,8 +196,7 @@ def resulturl(itemsellect):
                 for i in range(0,3):
                     resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
         return resulturl
-    except:
-        return '0'
+   
     
 def imageid(string):
     try:
