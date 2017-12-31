@@ -170,8 +170,8 @@ def pixivsearch(string):
         return [url,item]
     except: 
         return [0,0]    
-def itemsellectid(url):
-   
+def itemsellectid(url,item):
+    try: 
         r = s.get(url)
         link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
         print(link_list)
@@ -179,6 +179,9 @@ def itemsellectid(url):
             return link_list[int(item)-1]
         else:
             return random.choice(link_list)
+    except:
+        return '0'
+    
     
 def resulturl(itemsellect):
     
