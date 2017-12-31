@@ -354,10 +354,13 @@ def googlei(query,n):
     if n==1: 
         url = "https://www.google.com/search?q="+query2+"&source=lnms&tbm=isch"
     if n==2:
+        #大於800*600像素
         url = "https://www.google.com/search?q="+query2+"&tbs=isz:lt,islt:svga&tbm=isch&source=lnt"
     if n==3:
+        #大於1024*768像素
         url = "https://www.google.com/search?q="+query2+"&tbs=isz:lt,islt:xga&tbm=isch&source=lnt"
     if n==4:
+        #大於1600*1200像素
         url = "https://www.google.com/search?q="+query2+"&tbs=isz:lt,islt:2mp&tbm=isch&source=lnt"
     log_file = 'download.log'
     logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
