@@ -489,13 +489,13 @@ def handle_message(event):
         result=resulturl(itemid)
         print(result)
         
-        if result=='0' or result==0: 
-            return 0   
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=itemid)) 
-        for i in range(0,len(result)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
-        return 0    
+        if result!='0':
+            for i in range(0,len(result)):
+                print(result[i])
+                line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
+        if '-sid' in strinput:
+            print(itemid)
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=itemid))
     if event.message.text.lower().startswith('p-id')==True:
         x=imageid(event.message.text.lower()[4:])
         for i in range(0,len(x)):
