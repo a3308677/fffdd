@@ -490,6 +490,7 @@ def handle_message(event):
         result=resulturl(itemid)
         print(result)
         
+        
         if result!='0':
             for i in range(0,len(result)):
                 print(result[i])
