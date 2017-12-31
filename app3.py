@@ -136,6 +136,208 @@ def DownloadFile(referer):
 
 
 ##############################################################
+def pixivsearch(string):
+    try:
+        url='https://www.pixiv.net/search.php?s_mode=s_tag&order=popular'
+        string=(string+'-').lower()
+        keyword=(re.findall('p-s(.*?)-', string))[0]
+            
+        sex=re.findall('-g(.*?)-', string[3+len(keyword):])
+        if sex==['b']:
+            url=url+'_male'
+        if sex==['g']:
+            url=url+'_female'
+        url=url+'_d'
+
+        r18=re.findall('-r(.*?)-', string[3+len(keyword):])
+        if r18==['18']:    
+            url=url+'&mode=r18'
+        if r18==['n18']:        
+            url=url+'&mode=safe'
+        url=url+'&word='+keyword+'&p='
+
+        page=re.findall('-p(.*?)-', string[3+len(keyword):])
+        if page!=[]: 
+            url=url+page[0]
+        if page==[]:
+            url=url+str(random.choice([1,2,3]))
+
+        item=re.findall('-i(.*?)-', string[3+len(keyword):])
+        if item!=[]:
+            item=item[0]
+        
+        #url='https://www.pixiv.net/search.php?s_mode=s_tag&order=popular'+sex+'_d'+r18+'&word='+keyword+'&p='+page
+        return [url,item]
+    except:
+        return [0,0]
+
+def itemsellectid(url):
+    try:
+        r = s.get(url)
+        link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        else:
+            return random.choice(link_list)
+    except:
+        return 0
+    
+def resulturl(itemsellect):
+    
+    try:
+        resulturl=[]
+        url2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+itemsellect
+        r2 = s.get(url2)
+        manypage=re.findall('一次性投稿多張作品 (.*?)P', r2.text)
+        if manypage==[]:
+            resulturl+=['https://pixiv.cat/'+itemsellect+'.jpg']
+        if manypage!=[]:
+            if int(manypage[0])<3:
+                resulturl+=['https://pixiv.cat/'+itemsellect+'-1.jpg','https://pixiv.cat/'+itemsellect+'-2.jpg']
+            if int(manypage[0])>=3:
+                for i in range(0,3):
+                    resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
+        return resulturl
+    except:
+        return '0'
+    
+def imageid(string):
+    try:
+        string=string.lower()
+        number=0
+        for v in string:
+            if v=='-':
+                number+=1
+        if number==0:
+            itemsellect=string
+            resulturl=[]
+            url2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+itemsellect
+            r2 = s.get(url2)
+            manypage=re.findall('一次性投稿多張作品 (.*?)P', r2.text)
+            if manypage==[]:
+                resulturl=['https://pixiv.cat/'+itemsellect+'.jpg']
+            if manypage!=[]:
+                if int(manypage[0])<=5:
+                    for i in range(0,int(manypage[0])):
+                        resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
+                if int(manypage[0])>5:
+                    for i in range(0,5):
+                        resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
+            return resulturl
+        if number==1:
+            return ['https://pixiv.cat/'+string+'.jpg']
+    except:
+        return '0'
+
+def monthsearch(string4):
+    try:
+        string4=(string4+'-').lower()
+        url='https://www.pixiv.net/ranking.php?mode=monthly&content=illust'
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        rank = re.findall('-n(.*?)-', string4)
+        if rank!=[]:
+            return link_list[int(rank[0])-1]
+        if rank==[]:
+            return random.choice(link_list)
+    except:
+        return 0
+    
+def weelsearch(string):
+    try:
+        string=(string+'-').lower()
+        item=re.findall('-n(.*?)-', string)
+        if item!=[]:
+            item=item[0] 
+        if '-r18g' in string:
+            url='https://www.pixiv.net/ranking.php?mode=r18g'
+            r = s.get(url)
+            link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+            if item!=[]:
+                return link_list[int(item)-1]
+            if item==[]:
+                return random.choice(link_list)
+        r18 = re.findall('-r(.*?)-', string)
+        url='https://www.pixiv.net/ranking.php?mode=weekly'
+        if r18!=[]:
+            if r18[0]=='18':
+                r18='_r18'
+                url=url+r18 
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        if item==[]:
+            return random.choice(link_list)
+    except:
+        return 0
+    
+def todaysearch(string):
+    try:
+        string=string+'-'
+        string=string.lower()
+        item=re.findall('-n(.*?)-', string)
+        if item!=[]:
+            item=item[0]
+        r18 = re.findall('-r(.*?)-', string)
+        url='https://www.pixiv.net/ranking.php?mode=daily'
+        if r18!=[]:
+            if r18[0]=='18':
+                r18='_r18'
+                url=url+r18            
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        if item==[]:
+            return random.choice(link_list)
+    except:
+        return 0
+    
+def boysearch(string):
+    try:
+        string=string+'-'
+        string=string.lower()
+        item=re.findall('-n(.*?)-', string)
+        if item!=[]:
+            item=item[0]
+        r18 = re.findall('-r(.*?)-', string)
+        url='https://www.pixiv.net/ranking.php?mode=male'
+        if r18!=[]:
+            if r18[0]=='18':
+                r18='_r18'
+                url=url+r18
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        if item==[]:
+            return random.choice(link_list)
+    except:
+        return 0
+    
+def girlsearch(string):
+    try:
+        string=string+'-'
+        string=string.lower()
+        item=re.findall('-n(.*?)-', string)
+        if item!=[]:
+            item=item[0]
+        r18 = re.findall('-r(.*?)-', string)
+        url='https://www.pixiv.net/ranking.php?mode=female'
+        if r18!=[]:
+            if r18[0]=='18':
+                r18='_r18'
+                url=url+r18
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        if item==[]:
+            return random.choice(link_list)
+    except:
+        return 0
+##############################################################
 from flask import Flask, request, abort
 
 from linebt2 import (
@@ -276,10 +478,77 @@ def handle_message(event):
             event.reply_token,
             TextSendMessage(text='吃屎'))
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text='吃屎'),data1=None)
-              
         line_bot_api.push_message(event.source.user_id,ImageSendMessage('https://pixiv.cat/66282266.jpg','https://pixiv.cat/66282266.jpg'))
-        
         return 0
+######################################################################
+    if event.message.text.lower().startswith('p-s')==True:
+        [url,item]=pixivsearch(event.message.text.lower())  
+        itemid=itemsellectid(url)
+        result=resulturl(itemid)
+        if result=='0' or result==0: 
+            return 0   
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=itemid)) 
+        for i in range(0,len(result)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
+        return 0    
+    if event.message.text.lower().startswith('p-id')==True:
+        x=imageid(event.message.text.lower()[4:])
+        for i in range(0,len(x)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(x[i],x[i]))
+        return 0    
+    if event.message.text.lower().startswith('p-mon')==True:
+        monthsearchid=monthsearch(event.message.text.lower())
+        if monthsearchid==0 or monthsearchid=='0':
+            return 0    
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=monthsearchid))
+        monthresult=imageid(monthsearchid)   
+        for i in range(0,len(monthresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(monthresult[i],monthresult[i]))
+        return 0
+    if event.message.text.lower().startswith('p-wk')==True:
+        #number數只有到50個
+        weeksearchid=weelsearch(event.message.text.lower()[4:])
+        if weeksearchid==0 or weeksearchid=='0':
+            return 0
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=weeksearchid))
+        weekresult=imageid(weeksearchid)
+        for i in range(0,len(weekresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(weekresult[i],weekresult[i]))
+        return 0
+    if event.message.text.lower().startswith('p-to')==True:
+        todaysearchid=todaysearch(sevent.message.text.lower()[4:])    
+        if todaysearchid==0 or todaysearchid=='0':
+            return 0
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=todaysearchid))
+        todayresult=imageid(todaysearchid)
+        for i in range(0,len(todayresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(todayresult[i],todayresult[i]))
+        return 0
+    if event.message.text.lower().startswith('p-boy')==True:
+        boysearchid=boysearch(event.message.text.lower()[5:])    
+        if boysearchid==0 or boysearchid=='0':
+            return 0
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=boysearchid))
+        boyresult=imageid(boysearchid)
+        for i in range(0,len(boyresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(boyresult[i],boyresult[i]))    
+        return 0
+    if event.message.text.lower().startswith('p-girl')==True:
+        girlsearchid=girlsearch(event.message.text.lower()event.message.text.lower()[6:])
+        if girlsearchid==0 or girlsearchid=='0':
+            return 0
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=girlsearchid))
+        girlresult=imageid(girlsearchid)
+        for i in range(0,len(girlresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(girlresult[i],girlresult[i]))        
+        return 0
+######################################################################
     if event.message.text=='11':
         x_time = time.time()
         keyword='オリジナル'
@@ -290,28 +559,28 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text=str(y_time-x_time)))
         line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
         return 0
-    if event.message.text.lower().startswith('gooi-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooi-')==True: 
         ss=googlei(event.message.text[5:],1)
         for i in range(0,3):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('gooil-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooil-')==True: 
         ss=googlei(event.message.text[6:],2)
         for i in range(0,3):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('gooim-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooim-')==True: 
         ss=googlei(event.message.text[6:],3)
         #image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
         for i in range(0,3):           
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))       
         return 0
-    if event.message.text.lower().startswith('gooih-',0,len(event.message.text))==1: 
+    if event.message.text.lower().startswith('gooih-')==True: 
         ss=googlei(event.message.text[6:],4)
         for i in range(0,3):           
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
         return 0
-    if event.message.text.lower().startswith('goo-',0,len(event.message.text))==1:    
+    if event.message.text.lower().startswith('goo-')==True:    
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[4:])))
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[4:])))
         return 0
