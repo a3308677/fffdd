@@ -539,7 +539,7 @@ def handle_message(event):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(boyresult[i],boyresult[i]))    
         return 0
     if event.message.text.lower().startswith('p-girl')==True:
-        girlsearchid=girlsearch(event.message.text.lower()event.message.text.lower()[6:])
+        girlsearchid=girlsearch(event.message.text.lower()[6:])
         if girlsearchid==0 or girlsearchid=='0':
             return 0
         if '-sid' in event.message.text.lower():
