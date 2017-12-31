@@ -174,6 +174,7 @@ def itemsellectid(url):
     
         r = s.get(url)
         link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
+        print(link_list)
         if item!=[]:
             return link_list[int(item)-1]
         else:
