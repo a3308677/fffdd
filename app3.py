@@ -66,74 +66,6 @@ data_post = {
 print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
-        
-def DownloadFile(referer):
-        referer2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+referer
-        #dir_='D:/Dropbox/pixiv2/'+keyword+'/'
-        dir2_='/pixiv3/'
-        '''
-        try:
-            if not os.path.exists(dir_):
-                os.mkdir(dir_)
-            elif os.path.isfile(dir_):
-                raise Exception("failed to create directory '%s'" % dir_)
-        except:
-                print('mkdir造成失敗')
-        '''
-        indent='\t'
-        headers = headers_default.copy()
-        headers['Referer'] = referer2
-    
-    
-        try:
-            
-            r = s.get(referer2,headers=headers_default)    
-        
-            
-            findx=re.findall('https://i.pximg.net/img-original(.*?)"', r.text)
-            #print(referer2)
-            url= ( 'https://i.pximg.net/img-original'+findx[0])
-            #print(referer2)
-            #print(url)
-            #dir_='PixivBookmarkCrawler/'       
-            #file = dir_+str(rank)+'-'+ str(referer)+'-'+star+'.jpg'
-            #file = dir_+star+'-'+str(referer)+'.jpg'
-            #print('%sdownloading' % indent, file)
-            r = s.get(url, headers=headers)
-            
-
-            file_to = dir2_+ str(referer)+'.jpg'
-            #file_to = dir2_+star+'-'+url[len(url)-15:len(url)-7]+'-'+'.jpg'
-            #file_to = url[len(url)-15:len(url)-7]+'.jpg'
-            #print(url[len(url)-15:len(url)-7])
-        
-            x_time = time.time()
-            dbx.files_upload(r.content, file_to)
-            y_time = time.time()
-            #print(y_time-x_time)
-
-            x_time = time.time()
-            link = dbx.sharing_create_shared_link(file_to)            
-            url = link.url
-            y_time = time.time()
-            #print(y_time-x_time)
-            
-            return (url[0:len(url)-4]+'raw=1')
-            #Write(file, r.content)
-            print(y_time-x_time)
-        except:
-            print('失敗到album')
-       
-        
-            #result = dbx.files_get_temporary_link('/'+url[len(url)-15:len(url)-7]+'.jpg')
-            #link = dbx.sharing_create_shared_link('/'+str(rank)+'-'+ url[len(url)-15:len(url)-7]+'-'+star+'.jpg')
-            #url = link.url
-            #print(url[0:len(url)-4]+'raw=1')
-   
-            #print('/'+url[len(url)-15:len(url)-7]+'.jpg')
-            #print('%sdone' % indent)
-            #return str(url[0:len(url)-4]+'raw=1')
-
 
 ##############################################################
 def pixivsearch(string):
@@ -174,17 +106,15 @@ def itemsellectid(url,item):
     try: 
         r = s.get(url)
         link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
-        print(link_list)
+        
         if item!=[]:
             return link_list[int(item)-1]
         else:
             return random.choice(link_list)
     except:
         return '0'
-    
-    
+
 def resulturl(itemsellect):
-    
     try:
         resulturl=[]
         url2='https://www.pixiv.net/member_illust.php?mode=medium&illust_id='+itemsellect
@@ -550,16 +480,6 @@ def handle_message(event):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(girlresult[i],girlresult[i]))        
         return 0
 ######################################################################
-    if event.message.text=='11':
-        x_time = time.time()
-        keyword='オリジナル'
-        r = s.get("https://www.pixiv.net/search.php?word="+keyword+"&s_mode=s_tag_full&order=popular_male_d&mode=r18&p="+str(random.choice([1,2,3])))
-        link_list = re.findall('stId&quot;:&quot;(.*?)&quot', r.text)
-        x=DownloadFile(random.choice(link_list))
-        y_time = time.time()
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text=str(y_time-x_time)))
-        line_bot_api.push_message(event.source.user_id,ImageSendMessage(x,x))
-        return 0
     if event.message.text.lower().startswith('gooi-')==True: 
         ss=googlei(event.message.text[5:],1)
         for i in range(0,3):
