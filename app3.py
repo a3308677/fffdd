@@ -483,10 +483,12 @@ def handle_message(event):
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
         [url,item]=pixivsearch(event.message.text.lower())  
+        print(url,item)
         itemid=itemsellectid(url)
+        print(itemid)
         result=resulturl(itemid)
-        for i in range(0,len(result)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
+        print(result)
+        
         if result=='0' or result==0: 
             return 0   
         if '-sid' in event.message.text.lower():
