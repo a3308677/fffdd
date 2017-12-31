@@ -340,13 +340,13 @@ def girlsearch(string):
 ##############################################################
 from flask import Flask, request, abort
 
-from linebt2 import (
+from linebot import (
     LineBotApi, WebhookHandler
 )
-from linebt2.exceptions import (
+from linebot.exceptions import (
     InvalidSignatureError
 )
-from linebt2.models import *
+from linebot.models import *
 
 app = Flask(__name__)
 
