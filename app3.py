@@ -485,7 +485,7 @@ def handle_message(event):
     if event.message.text.lower().startswith('p-s')==True:
         [url,item]=pixivsearch(event.message.text)  
         print(url,item)
-        itemid=itemsellectid(url)
+        itemid=itemsellectid(url,item)
         print(itemid)
         result=resulturl(itemid)
         print(result)
