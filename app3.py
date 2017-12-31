@@ -485,6 +485,8 @@ def handle_message(event):
         [url,item]=pixivsearch(event.message.text.lower())  
         itemid=itemsellectid(url)
         result=resulturl(itemid)
+        for i in range(0,len(result)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
         if result=='0' or result==0: 
             return 0   
         if '-sid' in event.message.text.lower():
