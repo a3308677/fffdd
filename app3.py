@@ -426,16 +426,22 @@ def googlei(query,n):
     return x
 
 
-
+def get_sourceid(event):
+    if event.source.type == 'user':
+        return event.source.user_id
+    elif event.source.type == 'group':
+        return event.source.group_id
+    elif event.source.type == 'room':
+        return event.source.room_id
+    else:
+        raise Exception('event.source.type:%s' % event.source.type)
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    if event.source.type == 'group':
-        event.source.user_id=event.source.group_id
+    event.source.user_id=get_sourceid(event)
     if event.message.text=='吃屎':        
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='吃屎'))
-        print(event.source.group_id,event.source.user_id)
         return 0
     
 ######################################################################
