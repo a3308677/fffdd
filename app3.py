@@ -429,6 +429,8 @@ def googlei(query,n):
 
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
+    if event.source.type == 'group':
+        event.source.user_id=event.source.group_id
     if event.message.text=='吃屎':        
         line_bot_api.reply_message(
             event.reply_token,
