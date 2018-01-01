@@ -433,6 +433,7 @@ def handle_message(event):
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text='吃屎'))
+        print(event.reply_token,event.source.user_id)
         return 0
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
