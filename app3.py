@@ -268,6 +268,24 @@ def girlsearch(string):
             return random.choice(link_list)
     except:
         return 0
+    
+def intersearch(string):
+    try:
+        string=string+'-'
+        string=string.lower()
+        item=re.findall('-n(.*?)-', string)
+        if item!=[]:
+            item=item[0]
+        url='https://www.pixiv.net/ranking_area.php?type=detail&no=6'
+        
+        r = s.get(url)
+        link_list = re.findall('"illust"data-click-label="(.*?)"data-type', r.text)
+        if item!=[]:
+            return link_list[int(item)-1]
+        if item==[]:
+            return random.choice(link_list)
+    except:
+        return 0
 ##############################################################
 from flask import Flask, request, abort
 
@@ -479,6 +497,17 @@ def handle_message(event):
         girlresult=imageid(girlsearchid)
         for i in range(0,len(girlresult)):
             line_bot_api.push_message(event.source.user_id,ImageSendMessage(girlresult[i],girlresult[i]))        
+        return 0
+    
+    if event.message.text.lower().startswith('p-int')==True:
+        intersearchid=intersearch(event.message.text.lower()[5:])
+        if intersearchid==0 or intersearchid=='0':
+            return 0
+        if '-sid' in event.message.text.lower():
+            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=intersearchid))
+        interresult=imageid(intersearchid)
+        for i in range(0,len(interresult)):
+            line_bot_api.push_message(event.source.user_id,ImageSendMessage(interresult[i],interresult[i]))        
         return 0
 ######################################################################
     if event.message.text.lower().startswith('gi-')==True: 
