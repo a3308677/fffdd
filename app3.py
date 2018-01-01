@@ -35,6 +35,10 @@ import httplib2
 import os
 from apiclient import discovery
 
+
+print(os.environ['PORT'])
+print(type(os.environ['PORT']))
+print(int(os.environ['PORT']))
 ##############################################################
 dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
 url_host = 'http://www.pixiv.net/'
@@ -538,6 +542,5 @@ def handle_message(event):
   
 import os
 if __name__ == "__main__":
-    print(os.environ['PORT'])
-    print(type(os.environ['PORT']))
+    
     app.run(host='0.0.0.0',port=os.environ['PORT'])
