@@ -439,9 +439,13 @@ def get_sourceid(event):
 def handle_message(event):
     event.source.user_id=get_sourceid(event)
     if event.message.text=='吃屎':        
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
         return 0
     
 ######################################################################
