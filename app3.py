@@ -442,7 +442,7 @@ def get_sourceid(event):
 def handle_message(event):
     event.source.user_id=get_sourceid(event)
     if event.message.text=='吃屎':    
-        message2=array(array(TextSendMessage(text='吃屎')  ),array(TextSendMessage(text='吃屎')  ))
+        message2=list(list(TextSendMessage(text='吃屎')  ),list(TextSendMessage(text='吃屎')  ))
         line_bot_api.reply_message(event.reply_token,message2)
         
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
