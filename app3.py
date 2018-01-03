@@ -428,9 +428,9 @@ def googlei(query,n):
 def replymessage(reply_token,message):
     line_bot_api.reply_message(reply_token,message)
     
-def replymessage2(manymessage):
+def replymessage2(list1,list2,list3):
     with Pool(processes=8) as pool:
-        pool.starmap(replymessage,manymessage) 
+        pool.starmap(replymessage,(list1,list2,list3))
 
 def get_sourceid(event):
     if event.source.type == 'user':
