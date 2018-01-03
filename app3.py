@@ -425,12 +425,9 @@ def googlei(query,n):
     random.shuffle(x)    
     return x
 
-def replymessage(reply_token,message):
-    line_bot_api.reply_message(reply_token,message)
+
     
-def replymessage2(list1,list2,list3):
-    with Pool(processes=8) as pool:
-        pool.starmap(replymessage,(list1,list2,list3))
+
 
 def get_sourceid(event):
     if event.source.type == 'user':
@@ -444,8 +441,9 @@ def get_sourceid(event):
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
     event.source.user_id=get_sourceid(event)
-    if event.message.text=='吃屎':      
-        replymessage2([event.reply_token,TextSendMessage(text='吃屎')],[event.reply_token,TextSendMessage(text='吃屎2')],[event.reply_token,TextSendMessage(text='吃屎3')])
+    if event.message.text=='吃屎':    
+        message2=array(array(TextSendMessage(text='吃屎')  ),array(TextSendMessage(text='吃屎')  ))
+        line_bot_api.reply_message(event.reply_token,message2)
         
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
         
