@@ -444,10 +444,14 @@ def get_sourceid(event):
 def handle_message(event):
     event.source.user_id=get_sourceid(event)
     if event.message.text=='吃屎':  
-        
-        image1=ImageSendMessage('https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg')
-        message2=[image1,image1,image1,image1]
-        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='吃屎'),message2])
+        sss=['https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg']
+        image1=[]
+        image2=[TextSendMessage(text='吃屎')]
+        for i in range(0,len())
+            image1+=ImageSendMessage(sss[i],sss[i])
+            
+        image2+=image1
+        line_bot_api.reply_message(event.reply_token,image2)
         
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
         
