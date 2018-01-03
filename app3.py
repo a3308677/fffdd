@@ -557,6 +557,7 @@ def handle_message(event):
         line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
   
+
 import os
 if __name__ == "__main__":
     
