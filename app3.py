@@ -50,6 +50,7 @@ headers_default = {
     #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24'
 }
 #########
+'''
 s = requests.Session()
     # 访问登陆页，获取Cookie和post_key
 print('Visiting %s...' % url_login)
@@ -71,7 +72,7 @@ data_post = {
 print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
-
+'''
 ##############################################################
 def pixivsearch(string):
     try:   
@@ -443,7 +444,7 @@ def get_sourceid(event):
 def handle_message(event):
     event.source.user_id=get_sourceid(event)
     if event.message.text=='吃屎':    
-        message2=list(list(TextSendMessage(text='吃屎')  ),list(TextSendMessage(text='吃屎')  ))
+        message2=list(TextSendMessage(text='吃屎')  ,TextSendMessage(text='吃屎'  ))
         line_bot_api.reply_message(event.reply_token,message2)
         
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
