@@ -446,8 +446,8 @@ def handle_message(event):
     if event.message.text=='吃屎':  
         
         image1=ImageSendMessage('https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg')
-        message2=[image1,image1,image1,image1,image1]
-        line_bot_api.reply_message(event.reply_token,message2)
+        message2=[image1,image1,image1,image1]
+        line_bot_api.reply_message(event.reply_token,[TextSendMessage(text='吃屎'),message2])
         
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
         
