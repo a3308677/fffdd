@@ -511,7 +511,7 @@ def handle_message(event):
         weekresult=imageid(weeksearchid)
         image1=[0]*len(weekresult)
         for i in range(0,len(weekresult)):
-            image1[i]=ImageSendMessage(todayresult[i],weekresult[i])
+            image1[i]=ImageSendMessage(weekresult[i],weekresult[i])
         if '-sid' in event.message.text.lower():
             image2=[TextSendMessage(text=weeksearchid)]
             image2+=image1
