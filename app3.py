@@ -428,7 +428,7 @@ def googlei(query,n):
 def replymessage(reply_token,message):
     line_bot_api.reply_message(reply_token,message)
     
-def replymessage2(manymessage)
+def replymessage2(manymessage):
     with Pool(processes=8) as pool:
         pool.starmap(replymessage,manymessage) 
 
