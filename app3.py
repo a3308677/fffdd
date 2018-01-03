@@ -447,8 +447,9 @@ def handle_message(event):
         sss=['https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg']
         image1=[0]*2
         image2=[TextSendMessage(text='吃屎')]
-        image1[0]=ImageSendMessage(sss[0],sss[0])
-        image1[1]=ImageSendMessage(sss[1],sss[1])
+        for i in range(0,len(image1)):
+            image1[i]=ImageSendMessage(sss[i],sss[i])
+            
             
         image2+=image1
         line_bot_api.reply_message(event.reply_token,image2)
