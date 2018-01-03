@@ -50,7 +50,7 @@ headers_default = {
     #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24'
 }
 #########
-'''
+
 s = requests.Session()
     # 访问登陆页，获取Cookie和post_key
 print('Visiting %s...' % url_login)
@@ -72,7 +72,7 @@ data_post = {
 print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
-'''
+
 ##############################################################
 def pixivsearch(string):
     try:   
@@ -449,8 +449,7 @@ def handle_message(event):
         image2=[TextSendMessage(text='吃屎')]
         for i in range(0,len(image1)):
             image1[i]=ImageSendMessage(sss[i],sss[i])
-            
-            
+              
         image2+=image1
         line_bot_api.reply_message(event.reply_token,image2)
         
@@ -466,106 +465,166 @@ def handle_message(event):
         result=resulturl(itemid)
         if result=='0' or result==0:
             return 0
-        if '-sid' in event.message.text:
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=itemid))
+        image1=[0]*len(result)
         for i in range(0,len(result)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(result[i],result[i]))
+            image1[i]=ImageSendMessage(result[i],result[i])
+             
+        if '-sid' in event.message.text:
+            image2=TextSendMessage(text=itemid)
+            image2+=image1
+            #line_bot_api.push_message(event.source.user_id,)
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)    
         return 0
+    
     if event.message.text.lower().startswith('p-id')==True:
         x=imageid(event.message.text.lower()[4:])
+        image1=[0]*len(x)
         for i in range(0,len(x)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(x[i],x[i]))
+            image1[i]=ImageSendMessage(x[i],x[i])
+        line_bot_api.reply_message(event.reply_token,image1)    
         return 0    
+    
     if event.message.text.lower().startswith('p-mon')==True:
         monthsearchid=monthsearch(event.message.text.lower())
         if monthsearchid==0 or monthsearchid=='0':
             return 0    
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=monthsearchid))
-        monthresult=imageid(monthsearchid)   
+        monthresult=imageid(monthsearchid)  
+        image1=[0]*len(monthresult)
         for i in range(0,len(monthresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(monthresult[i],monthresult[i]))
+            image1[i]=ImageSendMessage(monthresult[i],monthresult[i])
+
+        if '-sid' in event.message.text.lower():
+            image2=TextSendMessage(text=monthsearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)
         return 0
+    
     if event.message.text.lower().startswith('p-wk')==True:
         #number數只有到50個
         weeksearchid=weelsearch(event.message.text.lower()[4:])
         if weeksearchid==0 or weeksearchid=='0':
             return 0
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=weeksearchid))
         weekresult=imageid(weeksearchid)
+        image1=[0]*len(weekresult)
         for i in range(0,len(weekresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(weekresult[i],weekresult[i]))
+            image1[i]=ImageSendMessage(todayresult[i],weekresult[i])
+        if '-sid' in event.message.text.lower():
+            image2=TextSendMessage(text=weeksearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)    
         return 0
+   
     if event.message.text.lower().startswith('p-to')==True:
         todaysearchid=todaysearch(event.message.text.lower()[4:])    
         if todaysearchid==0 or todaysearchid=='0':
             return 0
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=todaysearchid))
         todayresult=imageid(todaysearchid)
+        image1=[0]*len(todayresult)
         for i in range(0,len(todayresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(todayresult[i],todayresult[i]))
+            image1[i]=ImageSendMessage(todayresult[i],todayresult[i])
+        if '-sid' in event.message.text.lower():
+            image2=TextSendMessage(text=todaysearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)        
         return 0
+    
     if event.message.text.lower().startswith('p-boy')==True:
         boysearchid=boysearch(event.message.text.lower()[5:])    
         if boysearchid==0 or boysearchid=='0':
             return 0
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=boysearchid))
+        
         boyresult=imageid(boysearchid)
+        image1=[0]*len(boyresult)
         for i in range(0,len(boyresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(boyresult[i],boyresult[i]))    
+            image1[i]=ImageSendMessage(boyresult[i],boyresult[i])
+        if '-sid' in event.message.text.lower():
+            image2=TextSendMessage(text=boysearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)           
         return 0
+    
     if event.message.text.lower().startswith('p-girl')==True:
         girlsearchid=girlsearch(event.message.text.lower()[6:])
         if girlsearchid==0 or girlsearchid=='0':
             return 0
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=girlsearchid))
         girlresult=imageid(girlsearchid)
+        image1=[0]*len(girlresult)
         for i in range(0,len(girlresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(girlresult[i],girlresult[i]))        
+            image1[i]=ImageSendMessage(girlresult[i],girlresult[i])
+        if '-sid' in event.message.text.lower():
+            image2=TextSendMessage(text=girlsearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)  
         return 0
     
     if event.message.text.lower().startswith('p-int')==True:
         intersearchid=intersearch(event.message.text.lower()[5:])
         if intersearchid==0 or intersearchid=='0':
             return 0
-        if '-sid' in event.message.text.lower():
-            line_bot_api.push_message(event.source.user_id,TextSendMessage(text=intersearchid))
         interresult=imageid(intersearchid)
+        image1=[0]*len(interresult)
         for i in range(0,len(interresult)):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(interresult[i],interresult[i]))        
+            image1[i]=ImageSendMessage(interresult[i],interresult[i])
+        if '-sid' in event.message.text.lower():
+            mage2=TextSendMessage(text=intersearchid)
+            image2+=image1
+            line_bot_api.reply_message(event.reply_token,image2)
+            return 0
+        line_bot_api.reply_message(event.reply_token,image1)
         return 0
+    
 ######################################################################
     if event.message.text.lower().startswith('gi-')==True: 
         ss=googlei(event.message.text[3:],1)
+        image1=[0]*3
         for i in range(0,3):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
+            image1[i]=ImageSendMessage(ss[i],ss[i])
+        line_bot_api.reply_message(event.reply_token,image1) 
         return 0
+    
     if event.message.text.lower().startswith('gil-')==True: 
         ss=googlei(event.message.text[4:],2)
+        image1=[0]*3
         for i in range(0,3):
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
+             image1[i]=ImageSendMessage(ss[i],ss[i])
+        line_bot_api.reply_message(event.reply_token,image1)         
         return 0
+    
     if event.message.text.lower().startswith('gim-')==True: 
         ss=googlei(event.message.text[4:],3)
         #image_message = ImageSendMessage(original_content_url=ss[0],preview_image_url=ss[0])
+        image1=[0]*3
         for i in range(0,3):           
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))       
+            image1[i]=ImageSendMessage(ss[i],ss[i])
+        line_bot_api.reply_message(event.reply_token,image1)     
         return 0
+    
     if event.message.text.lower().startswith('gih-')==True: 
         ss=googlei(event.message.text[4:],4)
+        image1=[0]*3
         for i in range(0,3):           
-            line_bot_api.push_message(event.source.user_id,ImageSendMessage(original_content_url=ss[i],preview_image_url=ss[i]))
+            image1[i]=ImageSendMessage(ss[i],ss[i])
+        line_bot_api.reply_message(event.reply_token,image1)       
         return 0
+    
     if event.message.text.lower().startswith('gs-')==True:    
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[4:])))
-        line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
+        line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[3:])))
+        #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
   
-
 
 import os
 if __name__ == "__main__":
