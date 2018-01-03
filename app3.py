@@ -578,7 +578,7 @@ def handle_message(event):
         for i in range(0,len(interresult)):
             image1[i]=ImageSendMessage(interresult[i],interresult[i])
         if '-sid' in event.message.text.lower():
-            mage2=[TextSendMessage(text=intersearchid)]
+            image2=[TextSendMessage(text=intersearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
