@@ -154,11 +154,11 @@ def imageid(string):
             if manypage==[]:
                 resulturl=['https://pixiv.cat/'+itemsellect+'.jpg']
             if manypage!=[]:
-                if int(manypage[0])<=5:
+                if int(manypage[0])<=4:
                     for i in range(0,int(manypage[0])):
                         resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
-                if int(manypage[0])>5:
-                    for i in range(0,5):
+                if int(manypage[0])>4:
+                    for i in range(0,4):
                         resulturl+=['https://pixiv.cat/'+itemsellect+'-'+str(i+1)+'.jpg']
             return resulturl
         if number==1:
@@ -470,7 +470,7 @@ def handle_message(event):
             image1[i]=ImageSendMessage(result[i],result[i])
              
         if '-sid' in event.message.text:
-            image2=TextSendMessage(text=itemid)
+            image2=[TextSendMessage(text=itemid)]
             image2+=image1
             #line_bot_api.push_message(event.source.user_id,)
             line_bot_api.reply_message(event.reply_token,image2)
@@ -496,7 +496,7 @@ def handle_message(event):
             image1[i]=ImageSendMessage(monthresult[i],monthresult[i])
 
         if '-sid' in event.message.text.lower():
-            image2=TextSendMessage(text=monthsearchid)
+            image2=[TextSendMessage(text=monthsearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
@@ -513,7 +513,7 @@ def handle_message(event):
         for i in range(0,len(weekresult)):
             image1[i]=ImageSendMessage(todayresult[i],weekresult[i])
         if '-sid' in event.message.text.lower():
-            image2=TextSendMessage(text=weeksearchid)
+            image2=[TextSendMessage(text=weeksearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
@@ -529,7 +529,7 @@ def handle_message(event):
         for i in range(0,len(todayresult)):
             image1[i]=ImageSendMessage(todayresult[i],todayresult[i])
         if '-sid' in event.message.text.lower():
-            image2=TextSendMessage(text=todaysearchid)
+            image2=[TextSendMessage(text=todaysearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
@@ -546,7 +546,7 @@ def handle_message(event):
         for i in range(0,len(boyresult)):
             image1[i]=ImageSendMessage(boyresult[i],boyresult[i])
         if '-sid' in event.message.text.lower():
-            image2=TextSendMessage(text=boysearchid)
+            image2=[TextSendMessage(text=boysearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
@@ -562,7 +562,7 @@ def handle_message(event):
         for i in range(0,len(girlresult)):
             image1[i]=ImageSendMessage(girlresult[i],girlresult[i])
         if '-sid' in event.message.text.lower():
-            image2=TextSendMessage(text=girlsearchid)
+            image2=[TextSendMessage(text=girlsearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
@@ -578,7 +578,7 @@ def handle_message(event):
         for i in range(0,len(interresult)):
             image1[i]=ImageSendMessage(interresult[i],interresult[i])
         if '-sid' in event.message.text.lower():
-            mage2=TextSendMessage(text=intersearchid)
+            mage2=[TextSendMessage(text=intersearchid)]
             image2+=image1
             line_bot_api.reply_message(event.reply_token,image2)
             return 0
