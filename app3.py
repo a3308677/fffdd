@@ -447,7 +447,7 @@ def handle_message(event):
         sss=['https://pixiv.cat/45068168.jpg','https://pixiv.cat/45068168.jpg']
         image1=[]
         image2=[TextSendMessage(text='吃屎')]
-        for i in range(0,len())
+        for i in range(0,len(sss))
             image1+=ImageSendMessage(sss[i],sss[i])
             
         image2+=image1
