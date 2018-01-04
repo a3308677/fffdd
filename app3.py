@@ -34,13 +34,13 @@ import dropbox
 import httplib2
 import os
 from apiclient import discovery
-
+from googletrans import Translator
 
 print(os.environ['PORT'])
 print(type(os.environ['PORT']))
 print(int(os.environ['PORT']))
 ##############################################################
-dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
+#dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
 url_host = 'http://www.pixiv.net/'
 url_login = 'https://accounts.pixiv.net/login'
 url_post = 'https://accounts.pixiv.net/api/login'
