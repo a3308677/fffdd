@@ -31,4 +31,4 @@ google-api-python-client==1.6.4
 httplib2==0.10.3
 oauth2client==4.1.2
 dropbox==8.5.1
-
+googletrans==2.2.0
