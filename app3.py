@@ -505,6 +505,7 @@ def callback():
 
     return 'OK'
 
+
 def googles(query):
     query2=urllib.parse.quote_plus(query)
     tStart = time.time()
