@@ -43,7 +43,7 @@ headers_default = {
     #'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/535.24 (KHTML, like Gecko) Chrome/19.0.1055.1 Safari/535.24'
 }
 #########
-
+'''
 s = requests.Session()
     # 访问登陆页，获取Cookie和post_key
 print('Visiting %s...' % url_login)
@@ -65,7 +65,7 @@ data_post = {
 print('Logining中...')
 
 r = s.post(url_post, data=data_post, headers=headers_default)
-
+'''
 ##############################################################
 def pixivsearch(string):
     try:   
