@@ -34,7 +34,7 @@ import dropbox
 import httplib2
 import os
 from apiclient import discovery
-from googletrans import Translator
+
 
 print(os.environ['PORT'])
 print(type(os.environ['PORT']))
@@ -293,185 +293,6 @@ def intersearch(string):
     except:
         return 0
 ##############################################################
-def qureyenglish(qureyinput,ss,n):
-    s1=[]
-    s2=[]
-    stotall2=[]
-    stotall=[]
-    #stotall3 = [[0 for i in range(4)] for j in range(len(ss))]
-    sscharacter=[] 
-    sstarget=[]
-    if len(ss)>0:
-        for page in range(0,len(ss)):
-           
-
-            resp = requests.get(ss[page])
-            resp2text=re.sub('<dd>', '<dt>', resp.text)
-            resp2text=re.sub('<td>', '<dt>', resp2text)
-
-            find1=re.findall('<dt>(.*?)<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">',resp2text)
-            find2=re.findall('<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">(.*?)</span>',resp2text)
-            #print(len(find1),len(find2))
-            if len(find1)!=len(find2):
-                print('長度不一樣')
-            if len(find1)>len(find2):
-                find2+=['0']*abs(len(find1)-len(find2))
-            find1+=['0']*abs(len(find1)-len(find2))
-            #print(len(find1),find1)
-            #print(len(find2),find2)
-
-            if len(find1)>0:
-                if n==1:
-                    for i in range(0,len(find1)):
-                        if qureyinput.lower() in find1[i].lower():
-                            s1+= [find2[i]]
-                if n==2:
-                    for i2 in range(0,len(qureyinput)):
-                        for i in range(0,len(find1)):
-                            if qureyinput[i2].lower() in find1[i].lower():
-                                #print(qureyinput[i2],find1[i],find2[i])
-                                s1+= [find2[i]]
-            #print(s1)
-            if s1!=[]:
-                #print('s1[0]',s1[0],page)
-                if len(s1)<=5:
-                    for i in range(0,len(s1)):
-                        sscharacter+=[s1[i]]
-                if len(s1)>5:
-                    for i in range(0,5):
-                        sscharacter+=[s1[i]]
-                       
-            find3=re.findall('<dt>(.*?)<span style="font-weight: normal;">（<span lang="ja">',resp2text)
-            find4=re.findall('<span style="font-weight: normal;">（<span lang="ja">(.*?)</span>',resp2text)
-            #print(len(find3),len(find4))
-            if len(find3)!=len(find4):
-                print('長度不一樣')
-            if len(find3)>len(find4):
-                find4+=['0']*abs(len(find3)-len(find4))
-            find3+=['0']*abs(len(find3)-len(find4))
-            if len(find3)>0:
-                if n==1:
-                    for i in range(0,len(find3)):
-                        if qureyinput.lower() in find3[i].lower():
-                            s2+= [find4[i]]
-                if n==2:
-                    for i2 in range(0,len(qureyinput)):
-                        for i in range(0,len(find3)):
-                            if qureyinput[i2].lower() in find3[i].lower():
-                                #print('k',find3[i],find4[i],'k')
-                                s2+= [find4[i]]
-
-            if s2!=[]:
-                #print('s2[0]',s2[0],page) 
-                if len(s2)<=5:
-                    for i in range(0,len(s2)):
-                        sscharacter+=[s2[i]]
-                if len(s2)>5:
-                    for i in range(0,5):
-                        sscharacter+=[s2[i]]
-
-            find5=re.findall('<span lang="ja" xml:lang="ja"><span lang="ja" xml:lang="ja">(.*?)</span>',resp2text)
-            if find5==[]:
-                find5=re.findall('<span lang="ja" xml:lang="ja">(.*?)</span>',resp2text)
-            if find5!=[]:
-                #print('find5[0]',find5[0],page)
-                sstarget+=[find5[0]]
-            
-            find6=re.findall('<span lang="ja"><span lang="ja">(.*?)</span>',resp2text)
-            if find6==[]: 
-                find6=re.findall('<span lang="ja">(.*?)</span>',resp2text)
-            
-            if find6!=[]:
-                #print('find6[0]',find6[0],page)
-                sstarget+=[find6[0]]
-        #print('sscharacter',sscharacter)
-        #print('sstarget',sstarget)
-        sscharacternew=[]   
-        sstargetnew=[] 
-        for vv in sscharacter:
-            if vv not in sscharacternew:
-                sscharacternew.append(vv)
-        #print('sscharacternew',sscharacternew)
-        for vv in sstarget:
-            if vv not in sstargetnew:
-                sstargetnew.append(vv)
-        #print('sstargetnew',sstargetnew) 
-        return [sstargetnew,sscharacternew]
-
-def transresult(inputtargetstring):
-    try:
-        translator = Translator()
-    
-        tStart = time.time()
-
-        if '.' not in inputtargetstring:
-            detectlan=translator.detect(inputtargetstring).lang
-            qureyeesearch=websearch=inputtargetstring
-            if detectlan=='zh-CN' or detectlan=='ja':
-                inputn=2
-            if detectlan!='zh-CN' and detectlan!='ja':
-                inputn=1
-        if '.' in inputtargetstring:
-            slice=inputtargetstring.index('.')
-            websearch=inputtargetstring[:slice]
-            qureyeesearch=inputtargetstring[(slice+1):]   
-            detectlan=translator.detect(qureyeesearch).lang
- 
-            if detectlan=='zh-CN' or detectlan=='ja':
-                inputn=2
-            if detectlan!='zh-CN' and detectlan!='ja':
-                inputn=1
-
-        print(inputn)
-        log_file = 'download.log'
-        logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
-
-        headers = {}
-        headers['User-Agent'] = generate_user_agent()
-        query2=urllib.parse.quote_plus(websearch)
-        headers['Referer'] = 'https://www.google.com'
-        url='https://www.google.com.tw/search?hl=zh-TW&q='+query2+'%20wiki&meta=&aq=f&oq=%22'
-        req = urllib.request.Request(url, headers = headers)
-        resp = urllib.request.urlopen(req) 
-        page_content = str(resp.read())
-
-        #url=urllib.parse.unquote(url)
-        findx=re.findall('<h3 class="r"><a href="(.*?)" onmousedown', page_content)
-        ss=[]
-        for i in range(0,len(findx)):
-            if 'zh.wikipedia.org' in findx[i]:
-                ss+=[findx[i]]
-        [x5,x6]=qureyenglish(qureyeesearch,ss,inputn)
-        x5test=''
-        x6test=''
-        if x5!=[]:
-            for i in range(0,len(x5)):
-                x5test+=x5[i]+'\n'
-            x5test='標題名或作品名:'+'\n'+x5test
-        if x6!=[]:
-            for i in range(0,len(x6)):
-                x6test+=x6[i]+'\n'
-            x6test='作品其角色名或相關物品名:'+'\n'+x6test
-
-        return (x5test+x6test)
-        tend = time.time()
-        print(tend-tStart)
-    except:
-        return 0
-
-def googletran(inppp):
-    translator = Translator()
-    try:
-        if '-' in inppp:
-            slice=inppp.index('-')
-            dest=inppp[4:slice]
-            text=inppp[(slice+1):]
-            y=translator.translate(text, dest).text 
-            return y
-    except:
-        return 0
-    
-##############################################################
 from flask import Flask, request, abort
 
 from linebot import (
@@ -637,16 +458,6 @@ def handle_message(event):
         
         return 0
     
-    if event.message.text.lower().startswith('trw-')==True:
-        x=transresult(event.message.text.lower()[4:])    
-        if x!=0:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=x))
-        return 0   
-    if event.message.text.lower().startswith('trg.')==True:
-        y=googletran(event.message.text.lower())
-        if y!=0:
-            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=y))
-        return 0      
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
         [url,item]=pixivsearch(event.message.text)  
