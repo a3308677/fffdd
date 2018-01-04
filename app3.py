@@ -10,7 +10,6 @@ import lxml
 import urllib.request
 from urllib.parse import urlencode
 from urllib.request import Request, urlopen
-
 from selenium.webdriver.common.keys import Keys
 import json
 import os
@@ -29,9 +28,6 @@ from selenium.webdriver.common.keys import Keys
 import re
 import logging
 import multiprocessing
-import dropbox
-
-import httplib2
 import os
 from apiclient import discovery
 
