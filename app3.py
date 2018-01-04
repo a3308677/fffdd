@@ -484,7 +484,7 @@ from linebot.models import *
 
 app = Flask(__name__)
 
-line_bot_api = LineBotApi('1SmGKlg59CG8VNJQFGSRoHhUbbbtYnyoePC0S3DfEbZkYS0kKfueCEYNQz6L/zPbywLbATf1H6BAWnr+K2Ii5U8Bf5JddLN8LklJ/E74wgS6LP3I4cYTEeNVIPE2vu79qBdsaIwxRfzlkFocAWmIzAdB04t89/1O/w1cDnyilFU=')
+line_bot_api = LineBotApi('0cF6BoxxJtG1xkRBnr6mKi4CMWXFjLPbQDghb5o/hc3b2oGjF32x35Qit059GQ2eywLbATf1H6BAWnr+K2Ii5U8Bf5JddLN8LklJ/E74wgTXv82pufX6BxdMFaKIMHtXWB5G6EA99BsFr6kEbQ+lNAdB04t89/1O/w1cDnyilFU=')
 handler = WebhookHandler('9f40c12980e63edb3732a2f7aa4ea7a2')
 
 
