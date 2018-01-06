@@ -619,12 +619,12 @@ def handle_message(event):
         return 0
     if event.message.text.lower().startswith('測')==True:
         imagemap_message = ImagemapSendMessage(
-            base_url='https://pixiv.cat/59665299.jpg',
+            base_url='https://www.youtube.com/results?search_query=雪之下',
             alt_text='this is an imagemap11',
             base_size=BaseSize(height=1040, width=1040),
             actions=[
                 URIImagemapAction(
-                    link_uri='https://pixiv.cat/66282266.jpg',
+                    link_uri='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
                     area=ImagemapArea(
                         x=0, y=0, width=520, height=1040
                     )
