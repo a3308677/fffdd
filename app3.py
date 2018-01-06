@@ -619,21 +619,21 @@ def handle_message(event):
         return 0
     if event.message.text.lower().startswith('測')==True:
         image_carousel_template_message = TemplateSendMessage(
-            alt_text='ImageCarousel template',
+            alt_text='aaa',
             template=ImageCarouselTemplate(
                 columns=[
                     ImageCarouselColumn(
-                        image_url='https://example.com/item1.jpg',
+                        image_url='https://pixiv.cat/66282266.jpg',
                         action=PostbackTemplateAction(
-                            label='postback1',
-                            text='postback text1',
+                            label='aaa111',
+                            text='a12346',
                             data='action=buy&itemid=1'
                         )
                     ),
                     ImageCarouselColumn(
-                        image_url='https://example.com/item2.jpg',
+                        image_url='https://pixiv.cat/59665299.jpg',
                         action=PostbackTemplateAction(
-                            label='postback2',
+                            label='https://www.youtube.com/watch?v=7b0iQLDJ7K4',
                             text='postback text2',
                             data='action=buy&itemid=2'
                         )
