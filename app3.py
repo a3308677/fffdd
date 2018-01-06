@@ -629,7 +629,7 @@ def handle_message(event):
                             text='a12346',
                             data='action=buy&itemid=1'
                         )
-                    ),59665299
+                    ),
                     ImageCarouselColumn(
                         image_url='https://pixiv.cat/59665299.jpg',
                         action=PostbackTemplateAction(
