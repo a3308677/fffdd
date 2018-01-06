@@ -617,7 +617,34 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[3:])))
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
-  
+    if event.message.text.lower().startswith('測')==True:
+        image_carousel_template_message = TemplateSendMessage(
+            alt_text='aaa',
+            template=ImageCarouselTemplate(
+                columns=[
+                    ImageCarouselColumn(
+                        image_url='https://pixiv.cat/66282266.jpg',
+                        action=PostbackTemplateAction(
+                            label='aaa111',
+                            text='a12346',
+                            data='action=buy&itemid=1'
+                        )
+                    ),59665299
+                    ImageCarouselColumn(
+                        image_url='https://pixiv.cat/59665299.jpg',
+                        action=PostbackTemplateAction(
+                            label='https://www.youtube.com/watch?v=7b0iQLDJ7K4',
+                            text='postback text2',
+                            data='https://www.youtube.com/watch?v=7b0iQLDJ7K4'
+                        )
+                    )
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,image_carousel_template_message)    
+        
+        
+        return 0
 
 import os
 if __name__ == "__main__":
