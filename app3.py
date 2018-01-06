@@ -618,30 +618,26 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('測')==True:
-        image_carousel_template_message = TemplateSendMessage(
-            alt_text='ImageCarousel templatexxx',
-            template=ImageCarouselTemplate(
-                columns=[
-                    ImageCarouselColumn(
-                        image_url='https://pixiv.cat/66282266.jpg',
-                        action=PostbackTemplateAction(
-                            label='11111',
-                            text='postback 11111',
-                            data='action=buy&itemid=1'
-                        )
-                    ),
-                    ImageCarouselColumn(
-                        image_url='https://pixiv.cat/59665299.jpg',
-                        action=PostbackTemplateAction(
-                            label='22222',
-                            text='postback 22222',
-                            data='action=buy&itemid=2'
-                        )
+        imagemap_message = ImagemapSendMessage(
+            base_url='https://pixiv.cat/59665299.jpg',
+            alt_text='this is an imagemap11',
+            base_size=BaseSize(height=1040, width=1040),
+            actions=[
+                URIImagemapAction(
+                    link_uri='https://pixiv.cat/66282266.jpg',
+                    area=ImagemapArea(
+                        x=0, y=0, width=520, height=1040
                     )
-                ]
-            )
+                ),
+                MessageImagemapAction(
+                    text='hello',
+                    area=ImagemapArea(
+                        x=520, y=0, width=520, height=1040
+                    )
+                )
+            ]
         )
-        line_bot_api.reply_message(event.reply_token,image_carousel_template_message)    
+        line_bot_api.reply_message(event.reply_token,imagemap_message)    
         
         
         return 0
