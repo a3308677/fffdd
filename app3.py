@@ -619,7 +619,7 @@ def handle_message(event):
         return 0
     if event.message.text.lower().startswith('測')==True:
         imagemap_message = ImagemapSendMessage(
-            base_url='https://www.youtube.com/results?search_query=雪之下',
+            base_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',
             alt_text='this is an imagemap11',
             base_size=BaseSize(height=1040, width=1040),
             actions=[
