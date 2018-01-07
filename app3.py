@@ -622,15 +622,7 @@ def handle_message(event):
             base_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
             alt_text='this is an imagemap',
             base_size=BaseSize(x=0, y=0,height=520, width=520),
-            base_url2='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-            alt_text='this is an imagemap',
-            base_size=BaseSize(x=530, y=0,height=510, width=520),
-            base_url3='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-            alt_text='this is an imagemap',
-            base_size=BaseSize(x=0, y=520,height=510, width=510),
-            base_url4='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-            alt_text='this is an imagemap',
-            base_size=BaseSize(x=530, y=530,height=500, width=500),
+
             actions=[
                 URIImagemapAction(
                     link_uri='http://www.eyny.com/thread-10447098-1-1.html',
