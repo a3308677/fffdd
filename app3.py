@@ -422,7 +422,41 @@ def googlei(query,n):
     return x
 
 
+def youtubee(websearch,n):
+    #websearch='雪之下'
+    query2=urllib.parse.quote_plus(websearch)
+    if n==1:
+        url='https://www.youtube.com/results?search_query='+query2
+    if n==2:
+        #上傳日期
+        url='https://www.youtube.com/results?search_query='+query2+'&sp=CAI%253D'
+    if n==3:
+        #觀看次數
+        url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'
+    log_file = 'download.log'
+    logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
+
+    headers = {}
+    headers['User-Agent'] = generate_user_agent()
+    headers['Referer'] = 'https://www.google.com'
+    req = urllib.request.Request(url, headers = headers)
+    resp = urllib.request.urlopen(req) 
+    content =  resp.read().decode(resp.headers.get_content_charset())
+    #page_content = str(output.read())
+
+    findx=re.findall('<img src="(.*?)">', content)
+    findid=re.findall('https://i.ytimg.com/vi/(.*?)/hqdefault', str(findx))
     
+    for i in range(0,len(findid)):
+        findid[i]='https://www.youtube.com/watch?v='+findid[i]
+    find3=[]
+    find4=[]
+    find2=re.findall('isPreloaded":true}},"title":{"accessibility":{"accessibilityData":{(.*?)觀看次數', content)
+    for i in range(0,len(find2)):
+        find3+=[re.findall('label":"(.*?) 上傳者', find2[i])]
+        find4+=[re.findall('上傳者：(.*?) ', find2[i])]
+
+    return [findx,findid,find3,find4] 
 
 
 def get_sourceid(event):
@@ -617,10 +651,15 @@ def handle_message(event):
         line_bot_api.reply_message(event.reply_token,TextSendMessage(text=googles(event.message.text[3:])))
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
-    if event.message.text.lower().startswith('測')==True:
-        
+    if event.message.text.lower().startswith('yt')==True:
+        if input[2:].startswith('-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(input[3:],1)
+        if input[2:].startswith('d-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(input[4:],2)
+        if input[2:].startswith('p-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(input[4:],3)
         carousel_template_message = TemplateSendMessage(
-            alt_text='雪之下搜尋結果',
+            alt_text='搜尋結果',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
@@ -628,12 +667,25 @@ def handle_message(event):
                 ]
             )
         )
-       
-        line_bot_api.reply_message(event.reply_token,carousel_template_message)
-        
-        
-        return 0
+        try:
+            line_bot_api.reply_message(event.reply_token,carousel_template_message)
+        except:
+            return 0
 
+    if event.message.text.lower().startswith('測')==True:
+        alt_text='雪之下搜尋結果'
+        carousel_template_message = TemplateSendMessage(
+
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
+                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')])
+                ]
+            )
+        )
+        line_bot_api.reply_message(event.reply_token,carousel_template_message)
+        return 0
+    
 import os
 if __name__ == "__main__":
     
