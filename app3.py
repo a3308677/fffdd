@@ -619,46 +619,28 @@ def handle_message(event):
         return 0
     if event.message.text.lower().startswith('測')==True:
         carousel_template_message = TemplateSendMessage(
-            alt_text='Carousel template',
+            alt_text='雪之下搜尋結果',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(
-                        thumbnail_image_url='https://example.com/item1.jpg',
-                        title='this is menu1',
-                        text='description1',
+                        thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
+                        title='雪之下雪乃式的傲嬌',
+                        text='gpzvgwxa • 觀看次數：136  2 個月前',
                         actions=[
-                            PostbackTemplateAction(
-                                label='postback1',
-                                text='postback text1',
-                                data='action=buy&itemid=1'
-                            ),
-                            MessageTemplateAction(
-                                label='message1',
-                                text='message text1'
-                            ),
                             URITemplateAction(
-                                label='uri1',
-                                uri='http://example.com/1'
+                                label='開始觀看',
+                                uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ'
                             )
                         ]
                     ),
                     CarouselColumn(
-                        thumbnail_image_url='https://example.com/item2.jpg',
-                        title='this is menu2',
-                        text='description2',
+                        thumbnail_image_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',
+                        title='雪之下雪乃',
+                        text='林啊啊 林啊啊 • 觀看次數：481  8 個月前',
                         actions=[
-                            PostbackTemplateAction(
-                                label='postback2',
-                                text='postback text2',
-                                data='action=buy&itemid=2'
-                            ),
-                            MessageTemplateAction(
-                                label='message2',
-                                text='message text2'
-                            ),
                             URITemplateAction(
-                                label='uri2',
-                                uri='http://example.com/2'
+                                label='開始觀看',
+                                uri='https://www.youtube.com/watch?v=yqcn3n0BbE4'
                             )
                         ]
                     )
