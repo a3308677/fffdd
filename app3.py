@@ -618,47 +618,55 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('測')==True:
-        imagemap_message = ImagemapSendMessage(
-            base_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-            alt_text='this is an imagemap',
-            base_size=BaseSize(x=0, y=0,height=520, width=520),
-            
-            actions=[
-                URIImagemapAction(
-                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
-                    area=ImagemapArea(
-                        x=0, y=0, width=520, height=520
+        carousel_template_message = TemplateSendMessage(
+            alt_text='Carousel template',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(
+                        thumbnail_image_url='https://example.com/item1.jpg',
+                        title='this is menu1',
+                        text='description1',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='postback1',
+                                text='postback text1',
+                                data='action=buy&itemid=1'
+                            ),
+                            MessageTemplateAction(
+                                label='message1',
+                                text='message text1'
+                            ),
+                            URITemplateAction(
+                                label='uri1',
+                                uri='http://example.com/1'
+                            )
+                        ]
+                    ),
+                    CarouselColumn(
+                        thumbnail_image_url='https://example.com/item2.jpg',
+                        title='this is menu2',
+                        text='description2',
+                        actions=[
+                            PostbackTemplateAction(
+                                label='postback2',
+                                text='postback text2',
+                                data='action=buy&itemid=2'
+                            ),
+                            MessageTemplateAction(
+                                label='message2',
+                                text='message text2'
+                            ),
+                            URITemplateAction(
+                                label='uri2',
+                                uri='http://example.com/2'
+                            )
+                        ]
                     )
-                ),
-                
-                URIImagemapAction(
-                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
-                    area=ImagemapArea(
-                        x=0, y=520, width=510, height=510
-                    )
-                ),
-                URIImagemapAction(
-                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
-                    area=ImagemapArea(
-                        x=530, y=530, width=500, height=500
-                    )
-                )
-                
-            ]
-            base_url2='https://i.ytimg.com/vi/YXPngaprT5I/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBt4x9Ev4HvjNj1j7SMcrqYIQ3uhg',
-            alt_text2='this is an imagemap',
-            base_size2=BaseSize(x=530, y=0,height=510, width=520),
-            actions=[
-                URIImagemapAction(
-                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
-                    area=ImagemapArea(
-                        x=530, y=0, width=510, height=520
-                    )
-                )
-            ]    
+                ]
+            )
         )
        
-        line_bot_api.reply_message(event.reply_token,imagemap_message)
+        line_bot_api.reply_message(event.reply_token,carousel_template_message)
         
         
         return 0
