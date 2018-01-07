@@ -625,7 +625,7 @@ def handle_message(event):
                     CarouselColumn(
                         thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
                         title='雪之下雪乃式的傲嬌雪之下雪乃式的傲嬌雪之下雪乃式的傲嬌雪之下雪乃',
-                        text='gpzvgwxa\n觀看次數：136\n2 個月前',
+                        text='gpzvgwxa',
                         actions=[
                             URITemplateAction(
                                 label='開始觀看',
