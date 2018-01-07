@@ -654,28 +654,36 @@ def handle_message(event):
     if event.message.text.lower().startswith('yt')==True:
         if input[2:].startswith('-'):
             [imageurl,watchurl,title,uploadp]=youtubee(input[3:],1)
+            result=input[3:]
         if input[2:].startswith('d-'):
             [imageurl,watchurl,title,uploadp]=youtubee(input[4:],2)
+            result=input[4:]
         if input[2:].startswith('p-'):
             [imageurl,watchurl,title,uploadp]=youtubee(input[4:],3)
-        carousel_template_message = TemplateSendMessage(
-            alt_text='搜尋結果',
-            template=CarouselTemplate(
-                columns=[
-                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
-                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')])
-                ]
-            )
-        )
+            result=input[4:]
         try:
+            carousel_template_message = TemplateSendMessage(
+                alt_text=result+'搜尋結果',
+                template=CarouselTemplate(
+                    columns=[
+                        CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploadp[0],actions=[URITemplateAction(label='開始觀看',uri=watchurl[0])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploadp[1],actions=[URITemplateAction(label='開始觀看',uri=watchurl[1])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploadp[2],actions=[URITemplateAction(label='開始觀看',uri=watchurl[2])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploadp[3],actions=[URITemplateAction(label='開始觀看',uri=watchurl[3])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploadp[4],actions=[URITemplateAction(label='開始觀看',uri=watchurl[4])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploadp[5],actions=[URITemplateAction(label='開始觀看',uri=watchurl[5])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploadp[6],actions=[URITemplateAction(label='開始觀看',uri=watchurl[6])]),
+                    ]
+                )
+            )
             line_bot_api.reply_message(event.reply_token,carousel_template_message)
+            return 0
         except:
             return 0
 
     if event.message.text.lower().startswith('測')==True:
-        alt_text='雪之下搜尋結果'
         carousel_template_message = TemplateSendMessage(
-
+            alt_text='雪之下搜尋結果'
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
