@@ -618,27 +618,40 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('測')==True:
-        confirm_template_message = TemplateSendMessage(
-            alt_text='Confirm template',
-            template=ConfirmTemplate(
-                text='Are you sure?',
-                actions=[
-                    PostbackTemplateAction(
-                        label='postback',
-                        text='postback text',
-                        link_uri='https://example.com/',
-                        data='action=buy&itemid=1'
-                        
-                    ),
-                    MessageTemplateAction(
-                        label='message',
-                        text='message text'
+        imagemap_message = ImagemapSendMessage(
+            base_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
+            alt_text='this is an imagemap',
+            base_size=BaseSize(height=1040, width=1040),
+            actions=[
+                URIImagemapAction(
+                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
+                    area=ImagemapArea(
+                        x=0, y=0, width=520, height=520
                     )
-                ]
-            )
+                ),
+                URIImagemapAction(
+                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
+                    area=ImagemapArea(
+                        x=530, y=0, width=510, height=520
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
+                    area=ImagemapArea(
+                        x=0, y=520, width=510, height=510
+                    )
+                ),
+                URIImagemapAction(
+                    link_uri='http://www.eyny.com/thread-10447098-1-1.html',
+                    area=ImagemapArea(
+                        x=530, y=530, width=500, height=500
+                    )
+                )
+                
+            ]
         )
        
-        line_bot_api.reply_message(event.reply_token,confirm_template_message)
+        line_bot_api.reply_message(event.reply_token,imagemap_message)
         
         
         return 0
