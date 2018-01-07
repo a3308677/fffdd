@@ -453,6 +453,8 @@ def youtubee(websearch,n):
     find3=[]
     find4=[]
     find2=re.findall('isPreloaded":true}},"title":{"accessibility":{"accessibilityData":{(.*?)觀看次數', content)
+    
+    print(find2)
     for i in range(0,len(find2)):
         find3+=[re.findall('label":"(.*?) 上傳者', find2[i])]
         find4+=[re.findall('上傳者：(.*?) ', find2[i])]
