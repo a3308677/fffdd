@@ -661,25 +661,25 @@ def handle_message(event):
         if event.message.text.lower()[2:].startswith('p-'):
             [imageurl,watchurl,title,uploadp]=youtubee(event.message.text.lower()[4:],3)
             result=event.message.text.lower()[4:]
-        try:
-            carousel_template_message = TemplateSendMessage(
-                alt_text=result+'搜尋結果',
-                template=CarouselTemplate(
-                    columns=[
-                        CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploadp[0],actions=[URITemplateAction(label='開始觀看',uri=watchurl[0])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploadp[1],actions=[URITemplateAction(label='開始觀看',uri=watchurl[1])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploadp[2],actions=[URITemplateAction(label='開始觀看',uri=watchurl[2])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploadp[3],actions=[URITemplateAction(label='開始觀看',uri=watchurl[3])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploadp[4],actions=[URITemplateAction(label='開始觀看',uri=watchurl[4])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploadp[5],actions=[URITemplateAction(label='開始觀看',uri=watchurl[5])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploadp[6],actions=[URITemplateAction(label='開始觀看',uri=watchurl[6])]),
-                    ]
-                )
+        
+        carousel_template_message = TemplateSendMessage(
+            alt_text=result+'搜尋結果',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploadp[0],actions=[URITemplateAction(label='開始觀看',uri=watchurl[0])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploadp[1],actions=[URITemplateAction(label='開始觀看',uri=watchurl[1])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploadp[2],actions=[URITemplateAction(label='開始觀看',uri=watchurl[2])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploadp[3],actions=[URITemplateAction(label='開始觀看',uri=watchurl[3])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploadp[4],actions=[URITemplateAction(label='開始觀看',uri=watchurl[4])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploadp[5],actions=[URITemplateAction(label='開始觀看',uri=watchurl[5])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploadp[6],actions=[URITemplateAction(label='開始觀看',uri=watchurl[6])]),
+                ]
             )
-            line_bot_api.reply_message(event.reply_token,carousel_template_message)
-            return 0
-        except:
-            return 0
+        )
+        line_bot_api.reply_message(event.reply_token,carousel_template_message)
+        return 0
+        
+          
 
     if event.message.text.lower().startswith('測')==True:
         carousel_template_message = TemplateSendMessage(
