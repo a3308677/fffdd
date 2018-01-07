@@ -683,7 +683,7 @@ def handle_message(event):
 
     if event.message.text.lower().startswith('測')==True:
         carousel_template_message = TemplateSendMessage(
-            alt_text=result+'搜尋結果',
+            alt_text='搜尋結果',
             template=CarouselTemplate(
                 columns=[
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
