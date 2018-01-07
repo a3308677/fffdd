@@ -618,45 +618,27 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('測')==True:
-        imagemap_message = ImagemapSendMessage(
-            base_url='https://i.ytimg.com/vi/GPlbLb5Sa3Y/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCCk5VF5k23fSnbKwjh1cWX4pX0TQ',
-            alt_text='this is an imagemap11',
-            base_size=BaseSize(height=520, width=520),
-            actions=[
-                URIImagemapAction(
-                    link_uri='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-                    area=ImagemapArea(
-                        x=0, y=0, width=260, height=520
+        confirm_template_message = TemplateSendMessage(
+            alt_text='Confirm template',
+            template=ConfirmTemplate(
+                text='Are you sure?',
+                actions=[
+                    PostbackTemplateAction(
+                        label='postback',
+                        text='postback text',
+                        link_uri='https://example.com/',
+                        data='action=buy&itemid=1'
+                        
+                    ),
+                    MessageTemplateAction(
+                        label='message',
+                        text='message text'
                     )
-                ),
-                MessageImagemapAction(
-                    text='hello',
-                    area=ImagemapArea(
-                        x=520, y=0, width=260, height=520
-                    )
-                )
-            ]
+                ]
+            )
         )
-        imagemap_message2 = ImagemapSendMessage(
-            base_url='https://i.ytimg.com/vi/GPlbLb5Sa3Y/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLCCk5VF5k23fSnbKwjh1cWX4pX0TQ',
-            alt_text='this is an image641654map11',
-            base_size=BaseSize(height=520, width=520),
-            actions=[
-                URIImagemapAction(
-                    link_uri='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-                    area=ImagemapArea(
-                        x=0, y=0, width=260, height=520
-                    )
-                ),
-                MessageImagemapAction(
-                    text='hello',
-                    area=ImagemapArea(
-                        x=520, y=0, width=260, height=520
-                    )
-                )
-            ]
-        )
-        line_bot_api.reply_message(event.reply_token,[imagemap_message,imagemap_message2])    
+       
+        line_bot_api.reply_message(event.reply_token,confirm_template_message)
         
         
         return 0
