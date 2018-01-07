@@ -618,32 +618,13 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('測')==True:
+        
         carousel_template_message = TemplateSendMessage(
             alt_text='雪之下搜尋結果',
             template=CarouselTemplate(
                 columns=[
-                    CarouselColumn(
-                        thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',
-                        title='雪之下雪乃式的傲嬌雪之下雪乃式的傲嬌雪之下雪乃式的傲嬌雪之下雪乃',
-                        text='gpzvgwxa',
-                        actions=[
-                            URITemplateAction(
-                                label='開始觀看',
-                                uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ'
-                            )
-                        ]
-                    ),
-                    CarouselColumn(
-                        thumbnail_image_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',
-                        title='雪之下雪乃',
-                        text='林啊啊 林啊啊\n觀看次數：481\n8 個月前',
-                        actions=[
-                            URITemplateAction(
-                                label='開始觀看',
-                                uri='https://www.youtube.com/watch?v=yqcn3n0BbE4'
-                            )
-                        ]
-                    )
+                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/SqfdJ5DGusQ/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBTwHpPcPpBTUq0Wl2u4cZWsMUseA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
+                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/yqcn3n0BbE4/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLB5NhHUZMCNoEoDJkE7VnMY-0Z_IA',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')])
                 ]
             )
         )
