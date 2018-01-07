@@ -433,6 +433,7 @@ def youtubee(websearch,n):
     if n==3:
         #觀看次數
         url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'
+    print(url)   
     log_file = 'download.log'
     logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
 
@@ -455,7 +456,7 @@ def youtubee(websearch,n):
     for i in range(0,len(find2)):
         find3+=[re.findall('label":"(.*?) 上傳者', find2[i])]
         find4+=[re.findall('上傳者：(.*?) ', find2[i])]
-
+    print([findx,findid,find3,find4] )
     return [findx,findid,find3,find4] 
 
 
