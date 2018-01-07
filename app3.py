@@ -652,15 +652,15 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('yt')==True:
-        if input[2:].startswith('-'):
-            [imageurl,watchurl,title,uploadp]=youtubee(input[3:],1)
-            result=input[3:]
-        if input[2:].startswith('d-'):
-            [imageurl,watchurl,title,uploadp]=youtubee(input[4:],2)
-            result=input[4:]
-        if input[2:].startswith('p-'):
-            [imageurl,watchurl,title,uploadp]=youtubee(input[4:],3)
-            result=input[4:]
+        if event.message.text.lower()[2:].startswith('-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(event.message.text.lower()[3:],1)
+            result=event.message.text.lower()[3:]
+        if event.message.text.lower()[2:].startswith('d-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(event.message.text.lower()[4:],2)
+            result=event.message.text.lower()[4:]
+        if event.message.text.lower()[2:].startswith('p-'):
+            [imageurl,watchurl,title,uploadp]=youtubee(event.message.text.lower()[4:],3)
+            result=event.message.text.lower()[4:]
         try:
             carousel_template_message = TemplateSendMessage(
                 alt_text=result+'搜尋結果',
