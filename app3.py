@@ -691,7 +691,7 @@ def handle_message(event):
             alt_text='搜尋結果',
             template=CarouselTemplate(
                 columns=[
-                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/-jDE0biy_Gg/hqdefault.jpg?sqp=-oaymwEXCNACELwBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLAGv7c1kZBCWdjIbt-Zpa8gZJI6DA',title='的傲',text='gpzvgwxa',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=SqfdJ5DGusQ')]),
+                    CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/5ecQJhhH2rc/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&amp;rs=AOn4CLBfYYHtRK2QL5GSbhqQjJrKUPFPeQ',title='[经典人文地理]奥黛丽·赫本的多部影片[高清版]',text='中国云南卫视官方频道 China Yunnan TV Official Channel',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=5ecQJhhH2rc')]),
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/Iw6MK9_yUcw/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIZCGAE=&amp;rs=AOn4CLCyRMQkUnLSikVvSSVDX6ULjnBs7w',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')]),
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/Iw6MK9_yUcw/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIZCGAE=&amp;rs=AOn4CLCyRMQkUnLSikVvSSVDX6ULjnBs7w',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')]),
                     CarouselColumn(thumbnail_image_url='https://i.ytimg.com/vi/Iw6MK9_yUcw/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIZCGAE=&amp;rs=AOn4CLCyRMQkUnLSikVvSSVDX6ULjnBs7w',title='雪之',text='月前',actions=[URITemplateAction(label='開始觀看',uri='https://www.youtube.com/watch?v=yqcn3n0BbE4')]),
