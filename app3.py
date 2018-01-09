@@ -30,6 +30,8 @@ import logging
 import multiprocessing
 import os
 import numpy as np
+from googletrans import Translator
+
 print(os.environ['PORT'])
 print(type(os.environ['PORT']))
 print(int(os.environ['PORT']))
@@ -680,7 +682,7 @@ def transresult(inputtargetstring):
         headers = {}
         headers['User-Agent'] = generate_user_agent()
         query2=urllib.parse.quote_plus(websearch)
-        headers['Referer'] = np.random.choice(headerslist)
+        headers['Referer'] = 'https://www.google.com'
         url='https://www.google.com.tw/search?hl=zh-TW&q='+query2+'%20%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91&meta=&aq=f&oq=%22'
         req = urllib.request.Request(url, headers = headers)
         resp = urllib.request.urlopen(req) 
