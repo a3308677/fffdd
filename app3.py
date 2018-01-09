@@ -343,7 +343,7 @@ def googles(query):
 
 
     headers = {}
-    headers['User-Agent'] = generate_user_agent()
+    headers['User-Agent'] = 'https://www.google.com'
     headers['Referer'] = np.random.choice(headerslist)
     req = urllib.request.Request(url, headers = headers)
     resp = urllib.request.urlopen(req)
