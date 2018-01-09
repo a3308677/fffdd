@@ -33,6 +33,18 @@ print(os.environ['PORT'])
 print(type(os.environ['PORT']))
 print(int(os.environ['PORT']))
 ##############################################################
+headerslist=['http://www.google.com','http://www.google.co.jp','http://www.google.co.uk','http://www.google.es',
+             'http://www.google.ca','http://www.google.com.tw','http://www.google.com.au','http://www.google.co.kr',
+             'http://www.google.de','http://www.google.it','http://www.google.fr','http://www.google.com.tr',
+             'http://www.google.be','http://www.google.com.gr','http://www.google.co.in','http://www.google.com.mx',
+             'http://www.google.dk','http://www.google.com.ar','http://www.google.ch','http://www.google.cl',
+             'http://www.google.at','http://www.google.ie','http://www.google.com.co','http://www.google.pl',
+             'http://www.google.pt','http://www.google.com.pk','http://www.google.cn','http://www.google.com.my',
+             'http://www.google.com.sg','http://www.google.com.af','http://www.google.jo','http://www.google.co.il',
+             'http://www.google.com.lb','http://www.google.is','http://www.google.no','http://www.google.se',
+             'http://www.google.lt','http://www.google.lu','http://www.google.gr','http://www.google.ru',
+             'http://www.google.com.by','http://www.google.gy','http://www.google.co.cr','http://www.google.bs','http://www.google.com.cu']
+
 #dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
 url_host = 'http://www.pixiv.net/'
 url_login = 'https://accounts.pixiv.net/login'
@@ -424,15 +436,15 @@ def googlei(query,n):
 def youtubee(websearch,n):
     try:
         query2=urllib.parse.quote_plus(websearch)
-        if n==1:
+        c
             #url='https://www.youtube.com/results?search_query='+query2+'&gl=TW'
             url='https://www.youtube.com/results?search_query='+query2
         if n==2:
             #上傳日期
-            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAI%253D'
+            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAI%253D'+'&gl=TW'
         if n==3:
             #觀看次數
-            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'
+            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'+'&gl=TW'
 
         log_file = 'download.log'
         logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
@@ -443,7 +455,7 @@ def youtubee(websearch,n):
         #headers['Referer'] = 'http://www.google.co.jp'
         #rrrrrr=np.random.choice(headerslist)
 
-        headers['Referer'] ='https://www.google.com.tw'
+        headers['Referer'] =np.random.choice(headerslist)
         req = urllib.request.Request(url, headers = headers)
         resp = urllib.request.urlopen(req) 
         content =  resp.read().decode(resp.headers.get_content_charset())
