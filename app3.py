@@ -36,17 +36,17 @@ print(os.environ['PORT'])
 print(type(os.environ['PORT']))
 print(int(os.environ['PORT']))
 ##############################################################
-headerslist=['http://www.google.com','http://www.google.co.jp','http://www.google.co.uk','http://www.google.es',
-             'http://www.google.ca','http://www.google.com.tw','http://www.google.com.au','http://www.google.co.kr',
-             'http://www.google.de','http://www.google.it','http://www.google.fr','http://www.google.com.tr',
-             'http://www.google.be','http://www.google.com.gr','http://www.google.co.in','http://www.google.com.mx',
-             'http://www.google.dk','http://www.google.com.ar','http://www.google.ch','http://www.google.cl',
-             'http://www.google.at','http://www.google.ie','http://www.google.com.co','http://www.google.pl',
-             'http://www.google.pt','http://www.google.com.pk','http://www.google.cn','http://www.google.com.my',
-             'http://www.google.com.sg','http://www.google.com.af','http://www.google.jo','http://www.google.co.il',
-             'http://www.google.com.lb','http://www.google.is','http://www.google.no','http://www.google.se',
-             'http://www.google.lt','http://www.google.lu','http://www.google.gr','http://www.google.ru',
-             'http://www.google.com.by','http://www.google.gy','http://www.google.co.cr','http://www.google.bs','http://www.google.com.cu']
+headerslist=['https://www.google.com','https://www.google.co.jp','https://www.google.co.uk','https://www.google.es',
+             'https://www.google.ca','https://www.google.com.tw','https://www.google.com.au','https://www.google.co.kr',
+             'https://www.google.de','https://www.google.it','https://www.google.fr','https://www.google.com.tr',
+             'https://www.google.be','https://www.google.com.gr','https://www.google.co.in','https://www.google.com.mx',
+             'https://www.google.dk','https://www.google.com.ar','https://www.google.ch','https://www.google.cl',
+             'https://www.google.at','https://www.google.ie','https://www.google.com.co','https://www.google.pl',
+             'https://www.google.pt','https://www.google.com.pk','https://www.google.cn','https://www.google.com.my',
+             'https://www.google.com.sg','https://www.google.com.af','https://www.google.jo','https://www.google.co.il',
+             'https://www.google.com.lb','https://www.google.is','https://www.google.no','https://www.google.se',
+             'https://www.google.lt','https://www.google.lu','https://www.google.gr','https://www.google.ru',
+             'https://www.google.com.by','https://www.google.gy','https://www.google.co.cr','https://www.google.bs','https://www.google.com.cu']
 
 #dbx = dropbox.Dropbox('f-KAniQltpAAAAAAAAAAJIbsiXs5GHwPExH3wvTg9HyW1TSWv90WITwbAiYWSOmS')
 url_host = 'http://www.pixiv.net/'
@@ -346,7 +346,7 @@ def googles(query):
 
     headers = {}
     headers['User-Agent'] = generate_user_agent()
-    headers['Referer'] = 'https://www.google.com'
+    headers['Referer'] = np.random.choice(headerslist)
     req = urllib.request.Request(url, headers = headers)
     resp = urllib.request.urlopen(req)
        
@@ -682,7 +682,7 @@ def transresult(inputtargetstring):
         headers = {}
         headers['User-Agent'] = generate_user_agent()
         query2=urllib.parse.quote_plus(websearch)
-        headers['Referer'] = 'https://www.google.co.jp'
+        headers['Referer'] = np.random.choice(headerslist)
         url='https://www.google.com.tw/search?hl=zh-TW&q='+query2+'%20%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91&meta=&aq=f&oq=%22'
         req = urllib.request.Request(url, headers = headers)
         resp = urllib.request.urlopen(req) 
