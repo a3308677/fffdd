@@ -757,10 +757,10 @@ def handle_message(event):
             [title,uploader,imageurl,watch]=youtubee(event.message.text[3:],1)
             result=event.message.text[3:]
         if event.message.text.lower()[2:].startswith('d-'):
-            [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],2)
+            [title,uploader,imageurl,watch]=youtubee(event.message.text[4:],2)
             result=event.message.text[4:]
         if event.message.text.lower()[2:].startswith('p-'):
-            [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],3)
+            [title,uploader,imageurl,watch]=youtubee(event.message.text[4:],3)
             result=event.message.text[4:]
 
         carousel_template_message = TemplateSendMessage(
