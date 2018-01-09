@@ -434,105 +434,104 @@ def googlei(query,n):
     return x
 
 def youtubee(websearch,n):
-    try:
-        query2=urllib.parse.quote_plus(websearch)
-        if n==1:
-            #url='https://www.youtube.com/results?search_query='+query2+'&gl=TW'
-            url='https://www.youtube.com/results?search_query='+query2
-        if n==2:
-            #上傳日期
-            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAI%253D'+'&gl=TW'
-        if n==3:
-            #觀看次數
-            url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'+'&gl=TW'
+    
+      query2=urllib.parse.quote_plus(websearch)
+      if n==1:
+          #url='https://www.youtube.com/results?search_query='+query2+'&gl=TW'
+          url='https://www.youtube.com/results?search_query='+query2
+      if n==2:
+          #上傳日期
+          url='https://www.youtube.com/results?search_query='+query2+'&sp=CAI%253D'+'&gl=TW'
+      if n==3:
+          #觀看次數
+          url='https://www.youtube.com/results?search_query='+query2+'&sp=CAM%253D'+'&gl=TW'
 
-        log_file = 'download.log'
-        logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
+      log_file = 'download.log'
+      logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
 
-        headers = {}
-        headers['User-Agent'] = generate_user_agent()
-        #headers['Referer'] = 'https://www.google.com.tw'
-        #headers['Referer'] = 'http://www.google.co.jp'
-        #rrrrrr=np.random.choice(headerslist)
+      headers = {}
+      headers['User-Agent'] = generate_user_agent()
+      #headers['Referer'] = 'https://www.google.com.tw'
+      #headers['Referer'] = 'http://www.google.co.jp'
+      #rrrrrr=np.random.choice(headerslist)
 
-        headers['Referer'] =np.random.choice(headerslist)
-        req = urllib.request.Request(url, headers = headers)
-        resp = urllib.request.urlopen(req) 
-        content =  resp.read().decode(resp.headers.get_content_charset())
-        #page_content = str(output.read())
-        find3=[]
-        find4=[]
-        find5=[]
-        find6=[]
-        name=[]
-        uploader=[]
-        last1=0
-        last2=0
-        findidd=[]
-        manyname=[]
-        manyurl=[]
-        manyid=[]
-        endd=0
-        itemcounter=0
-        while '"title":{"accessibility":{"accessibilityData":{"label":"' or '{"playlistRenderer":{"playlistId":"' in content:
-            if '"title":{"accessibility":{"accessibilityData":{"label":"' in content[last1:]:
-                index1=content.index('"title":{"accessibility":{"accessibilityData":{"label":"',last1,len(content))
-            if '"title":{"accessibility":{"accessibilityData":{"label":"' not in content[last1:]:    
-                index1=float("inf")
-            if '{"playlistRenderer":{"playlistId":"' in content[last2:]:
-                index2=content.index('{"playlistRenderer":{"playlistId":"',last2,len(content))
-            if '{"playlistRenderer":{"playlistId":"' not in content[last2:]:
-                index2=float("inf")
+      headers['Referer'] =np.random.choice(headerslist)
+      req = urllib.request.Request(url, headers = headers)
+      resp = urllib.request.urlopen(req) 
+      content =  resp.read().decode(resp.headers.get_content_charset())
+      #page_content = str(output.read())
+      find3=[]
+      find4=[]
+      find5=[]
+      find6=[]
+      name=[]
+      uploader=[]
+      last1=0
+      last2=0
+      findidd=[]
+      manyname=[]
+      manyurl=[]
+      manyid=[]
+      endd=0
+      itemcounter=0
+      while '"title":{"accessibility":{"accessibilityData":{"label":"' or '{"playlistRenderer":{"playlistId":"' in content:
+          if '"title":{"accessibility":{"accessibilityData":{"label":"' in content[last1:]:
+              index1=content.index('"title":{"accessibility":{"accessibilityData":{"label":"',last1,len(content))
+          if '"title":{"accessibility":{"accessibilityData":{"label":"' not in content[last1:]:    
+              index1=float("inf")
+          if '{"playlistRenderer":{"playlistId":"' in content[last2:]:
+              index2=content.index('{"playlistRenderer":{"playlistId":"',last2,len(content))
+          if '{"playlistRenderer":{"playlistId":"' not in content[last2:]:
+              index2=float("inf")
 
 
-            if index1!=[] and index2!=[]:
-                if index1<index2:
-                    indexnew1=content.index('"simpleText":"',index1,len(content))
-                    indexnew2=content.index('}',indexnew1+14,len(content))
-                    name+=[content[indexnew1+14:indexnew2-1].replace('\\', '')]
+          if index1!=[] and index2!=[]:
+              if index1<index2:
+                  indexnew1=content.index('"simpleText":"',index1,len(content))
+                  indexnew2=content.index('}',indexnew1+14,len(content))
+                  name+=[content[indexnew1+14:indexnew2-1].replace('\\', '')]
 
-                    indexnew3=content.index('shortBylineText":{"runs":[{"text":"',indexnew2,len(content))
-                    indexnew4=content.index('"',indexnew3+35,len(content))
-                    uploader+=[content[indexnew3+35:indexnew4].replace('\\', '')]
+                  indexnew3=content.index('shortBylineText":{"runs":[{"text":"',indexnew2,len(content))
+                  indexnew4=content.index('"',indexnew3+35,len(content))
+                  uploader+=[content[indexnew3+35:indexnew4].replace('\\', '')]
 
-                    index4=content.rindex('"thumbnail":{"thumbnails":[{"url":"',last1,index1)
-                    index5=content.index('"',index4+35,index1)
-                    find4+=[content[index4+35:index5].replace("\\u0026", "&amp;")]
+                  index4=content.rindex('"thumbnail":{"thumbnails":[{"url":"',last1,index1)
+                  index5=content.index('"',index4+35,index1)
+                  find4+=[content[index4+35:index5].replace("\\u0026", "&amp;")]
 
-                    findidd+=['https://www.youtube.com/watch?v='+re.findall('https://i.ytimg.com/vi/(.*?)/', content[index4+35:index5])[0]]
+                  findidd+=['https://www.youtube.com/watch?v='+re.findall('https://i.ytimg.com/vi/(.*?)/', content[index4+35:index5])[0]]
 
-                    last1=indexnew4
-                    itemcounter+=1
+                  last1=indexnew4
+                  itemcounter+=1
 
-                if index2<index1:
-                    index6=content.index(']',index2+35,len(content))
-                    find5+=[content[index2+35:index6]]
+              if index2<index1:
+                  index6=content.index(']',index2+35,len(content))
+                  find5+=[content[index2+35:index6]]
 
-                    indexnew6=re.findall('"simpleText":"(.*?)}', content[index2+35:index6])[0]
-                    name+=[indexnew6[0:len(indexnew6)-1].replace('\\', '')]
+                  indexnew6=re.findall('"simpleText":"(.*?)}', content[index2+35:index6])[0]
+                  name+=[indexnew6[0:len(indexnew6)-1].replace('\\', '')]
 
-                    indexnew7=re.findall('"url":"(.*?)"', content[index2+35:index6])
-                    find4+=[indexnew7[len(indexnew7)-1].replace("\\u0026", "&amp;")]
+                  indexnew7=re.findall('"url":"(.*?)"', content[index2+35:index6])
+                  find4+=[indexnew7[len(indexnew7)-1].replace("\\u0026", "&amp;")]
 
-                    findidd+=['https://www.youtube.com/watch?v='+re.findall('https://i.ytimg.com/vi/(.*?)/',indexnew7[len(indexnew7)-1])[0]]
+                  findidd+=['https://www.youtube.com/watch?v='+re.findall('https://i.ytimg.com/vi/(.*?)/',indexnew7[len(indexnew7)-1])[0]]
 
-                    index7=content.index('shortBylineText":{"runs":[{"text":"',index2+35,len(content))
-                    index8=content.index('"',index7+35,len(content))                
-                    uploader+=[content[index7+35:index8]]
-                    last2=index8
-                    itemcounter+=1
-            if itemcounter==10:
-                break
-            if index1==float("inf") and index2==float("inf"):
-                break
+                  index7=content.index('shortBylineText":{"runs":[{"text":"',index2+35,len(content))
+                  index8=content.index('"',index7+35,len(content))                
+                  uploader+=[content[index7+35:index8]]
+                  last2=index8
+                  itemcounter+=1
+          if itemcounter==10:
+              break
+          if index1==float("inf") and index2==float("inf"):
+              break
 
-        print(['結']+name+[len(name)]+['結'])
-        print(['結']+uploader+[len(uploader)]+['結'])
-        print(['結']+find4+[len(find4)]+['結'])
-        print(['結']+findidd+[len(findidd)]+['結'])
-        return [name,uploader,find4,findidd]
-    except:
-        return 0
+      print(['結']+name+[len(name)]+['結'])
+      print(['結']+uploader+[len(uploader)]+['結'])
+      print(['結']+find4+[len(find4)]+['結'])
+      print(['結']+findidd+[len(findidd)]+['結'])
+      return [name,uploader,find4,findidd]
+    
     
 def get_sourceid(event):
     if event.source.type == 'user':
@@ -727,35 +726,34 @@ def handle_message(event):
         #line_bot_api.push_message(event.source.user_id,TextSendMessage(text=googles(event.message.text[3:])))
         return 0
     if event.message.text.lower().startswith('yt')==True:
-        try:
-            if event.message.text.lower()[2:].startswith('-'):
-                [title,uploader,imageurl,watch]=youtubee(event.message.text[3:],1)
-                result=event.message.text[3:]
-            if event.message.text.lower()[2:].startswith('d-'):
-                [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],2)
-                result=event.message.text[4:]
-            if event.message.text.lower()[2:].startswith('p-'):
-                [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],3)
-                result=event.message.text[4:]
-            
-            carousel_template_message = TemplateSendMessage(
-                alt_text=result+'搜尋結果',
-                template=CarouselTemplate(
-                    columns=[
-                        CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploader[0],actions=[URITemplateAction(label='開始觀看',uri=watch[0])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploader[1],actions=[URITemplateAction(label='開始觀看',uri=watch[1])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploader[2],actions=[URITemplateAction(label='開始觀看',uri=watch[2])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploader[3],actions=[URITemplateAction(label='開始觀看',uri=watch[3])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploader[4],actions=[URITemplateAction(label='開始觀看',uri=watch[4])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploader[5],actions=[URITemplateAction(label='開始觀看',uri=watch[5])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploader[6],actions=[URITemplateAction(label='開始觀看',uri=watch[6])]),
-                    ]
-                )
+        
+        if event.message.text.lower()[2:].startswith('-'):
+            [title,uploader,imageurl,watch]=youtubee(event.message.text[3:],1)
+            result=event.message.text[3:]
+        if event.message.text.lower()[2:].startswith('d-'):
+            [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],2)
+            result=event.message.text[4:]
+        if event.message.text.lower()[2:].startswith('p-'):
+            [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],3)
+            result=event.message.text[4:]
+
+        carousel_template_message = TemplateSendMessage(
+            alt_text=result+'搜尋結果',
+            template=CarouselTemplate(
+                columns=[
+                    CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploader[0],actions=[URITemplateAction(label='開始觀看',uri=watch[0])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploader[1],actions=[URITemplateAction(label='開始觀看',uri=watch[1])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploader[2],actions=[URITemplateAction(label='開始觀看',uri=watch[2])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploader[3],actions=[URITemplateAction(label='開始觀看',uri=watch[3])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploader[4],actions=[URITemplateAction(label='開始觀看',uri=watch[4])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploader[5],actions=[URITemplateAction(label='開始觀看',uri=watch[5])]),
+                    CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploader[6],actions=[URITemplateAction(label='開始觀看',uri=watch[6])]),
+                ]
             )
-            line_bot_api.reply_message(event.reply_token,carousel_template_message)
-            return 0
-        except:
-            return 0
+        )
+        line_bot_api.reply_message(event.reply_token,carousel_template_message)
+        return 0
+        
         
           
 
