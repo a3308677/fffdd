@@ -556,8 +556,173 @@ def youtubee(websearch,n):
     print(['結']+find6+[len(find6)]+['結'])
     '''
     return [name,uploader,find4,findidd]
+###################################################################
+def qureyenglish(qureyinput,ss,n):
+    try:
+        sstarget=[]
+        keyword2=[]
+        if len(ss)>1:
+            ss=ss[:1]
+        if len(ss)>0:
+            for page in range(0,len(ss)):
+                resp = requests.get(ss[page])
+                #find1=re.findall('<dt>(.*?)<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">',resp2text)
+                #find2=re.findall('<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">(.*?)</span>',resp2text)
+                last=0
+                while '<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">' in resp.text[last:]:  
+                    index1=resp.text.index('<span style="font-weight: normal;">（<span lang="ja" xml:lang="ja">',last,len(resp.text))
+                    if '<dt>' in resp.text[last:index1]:
+                        index2=resp.text.rindex('<dt>',last,index1)
+                        keyword=resp.text[(index2+4):index1]
+                        if n==2:
+                            for char in range(0,len(qureyinput)):
+                                if qureyinput[char].lower() in keyword.lower():
+                                    #print('有字在裡面')
+                                    if '</span>' in resp.text[(index1+66):]:
+                                        index3=resp.text.index('</span>',index1+66,len(resp.text))
+                                        if '<' not in resp.text[(index1+66):index3] and '>' not in resp.text[(index1+66):index3]:
+                                            #print(resp.text[(index1+66):index3])
+                                            keyword2+=[resp.text[(index1+66):index3]]
+                        if n==1:
+                            if qureyinput.lower() in keyword.lower():
+                                if '</span>' in resp.text[(index1+66):]:
+                                    index3=resp.text.index('</span>',index1+66,len(resp.text))
+                                    if '<' not in resp.text[(index1+66):index3] and '>' not in resp.text[(index1+66):index3]:    
+                                        #print(resp.text[(index1+66):index3])
+                                        keyword2+=[resp.text[(index1+66):index3]]
+                    last=index1+66
 
+                #find3=re.findall('<dt>(.*?)<span style="font-weight: normal;">（<span lang="ja">',resp2text)
+                #find4=re.findall('<span style="font-weight: normal;">（<span lang="ja">(.*?)</span>',resp2text)
+                last=0
+                while '<span style="font-weight: normal;">（<span lang="ja">' in resp.text[last:]:  
+                    index1=resp.text.index('<span style="font-weight: normal;">（<span lang="ja">',last,len(resp.text))
+                    if '<dt>' in resp.text[last:index1]: 
+                        index2=resp.text.rindex('<dt>',last,index1)
+                        keyword=resp.text[(index2+4):index1]
+                        #print(keyword)
+                        if n==2:
+                            for char in range(0,len(qureyinput)):
+                                if qureyinput[char].lower() in keyword.lower():
+                                    #print('有字在裡面')
+                                    if '</span>' in resp.text[(index1+52):]:
+                                        index3=resp.text.index('</span>',index1+52,len(resp.text))
+                                        if '<' not in resp.text[(index1+52):index3] and '>' not in resp.text[(index1+52):index3]:
+                                            #print(resp.text[(index1+52):index3])
+                                            keyword2+=[resp.text[(index1+52):index3]]
+                        if n==1:
+                            if qureyinput.lower() in keyword.lower():
+                                if '</span>' in resp.text[(index1+52):]:
+                                    index3=resp.text.index('</span>',index1+52,len(resp.text))
+                                    if '<' not in resp.text[(index1+52):index3] and '>' not in resp.text[(index1+52):index3]:
+                                        #print(resp.text[(index1+52):index3])
+                                        keyword2+=[resp.text[(index1+52):index3]]
+                    last=index1+52
+                
+                              
+                find5=re.findall('<span lang="ja" xml:lang="ja"><span lang="ja" xml:lang="ja">(.*?)</span>',resp.text)
+                find51=re.findall('<span lang="ja" xml:lang="ja">(.*?)</span>',resp.text)
+                if (find5+find51)!=[]:
+                    sstarget+=[(find5+find51)[0]]
+               
+                find6=re.findall('<span lang="ja"><span lang="ja">(.*?)</span>',resp.text)
+                find61=re.findall('<span lang="ja">(.*?)</span>',resp.text)
+                if (find6+find61)!=[]:
+                    sstarget+=[(find6+find61)[0]]
+                
+            sstargetnew=[] 
+            keyword2new=[]
+ 
+            for vv in sstarget:
+                if vv not in sstargetnew:
+                    sstargetnew.append(vv)
+        
+            for vv in keyword2:
+                if vv not in keyword2new:
+                    keyword2new.append(vv)
+            #print(keyword2new)
+            if len(keyword2new)>5:
+                keyword2new=keyword2new[:5]
+            
+            return [sstargetnew,keyword2new]    
+    except:
+        return [0,0]   
+
+
+def transresult(inputtargetstring):
+    try:
+        translator = Translator()
     
+        tStart = time.time()
+
+        if '.' not in inputtargetstring:
+            detectlan=translator.detect(inputtargetstring).lang
+            qureyeesearch=websearch=inputtargetstring
+            if detectlan=='zh-CN' or detectlan=='ja':
+                inputn=2
+            if detectlan!='zh-CN' and detectlan!='ja':
+                inputn=1
+        if '.' in inputtargetstring:
+            slice=inputtargetstring.index('.')
+            websearch=inputtargetstring[:slice]
+            qureyeesearch=inputtargetstring[(slice+1):]   
+            detectlan=translator.detect(qureyeesearch).lang
+ 
+            if detectlan=='zh-CN' or detectlan=='ja':
+                inputn=2
+            if detectlan!='zh-CN' and detectlan!='ja':
+                inputn=1
+
+        print(inputn)
+        log_file = 'download.log'
+        logging.basicConfig(level=logging.DEBUG, filename=log_file, filemode="a+", format="%(asctime)-15s %(levelname)-8s  %(message)s")
+
+        headers = {}
+        headers['User-Agent'] = generate_user_agent()
+        query2=urllib.parse.quote_plus(websearch)
+        headers['Referer'] = np.random.choice(headerslist)
+        url='https://www.google.com.tw/search?hl=zh-TW&q='+query2+'%20%E7%BB%B4%E5%9F%BA%E7%99%BE%E7%A7%91&meta=&aq=f&oq=%22'
+        req = urllib.request.Request(url, headers = headers)
+        resp = urllib.request.urlopen(req) 
+        page_content = str(resp.read())
+
+        #url=urllib.parse.unquote(url)
+        findx=re.findall('<h3 class="r"><a href="(.*?)" onmousedown', page_content)
+        ss=[]
+        for i in range(0,len(findx)):
+            if 'zh.wikipedia.org' in findx[i]:
+                ss+=[findx[i]]
+        [x5,x6]=qureyenglish(qureyeesearch,ss,inputn)
+        x5test=''
+        x6test=''
+        if x5!=[]:
+            for i in range(0,len(x5)):
+                x5test+=x5[i]+'\n'
+            x5test='標題名或作品名或人物名:'+'\n'+x5test
+        if x6!=[]:
+            for i in range(0,len(x6)):
+                x6test+=x6[i]+'\n'
+            x6test='作品其角色名:'+'\n'+x6test
+
+        return (x5test+x6test)
+        tend = time.time()
+        print(tend-tStart)
+    except:
+        return 0
+
+def googletran(inppp):
+    translator = Translator()
+    try:
+        if '-' in inppp:
+            slice=inppp.rindex('-')
+            dest=inppp[4:slice]
+            text=inppp[(slice+1):]
+            y=translator.translate(text, dest).text 
+            return y
+    except:
+        return 0
+      
+##############################################################
     
 def get_sourceid(event):
     if event.source.type == 'user':
@@ -584,7 +749,17 @@ def handle_message(event):
         #line_bot_api.reply_message(event.reply_token,TextSendMessage(text='吃屎'))
         
         return 0
-    
+######################################################################
+    if event.message.text.lower().startswith('trw-')==True:
+        x=transresult(event.message.text.lower()[4:])    
+        if x!=0:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=x[:(len(x)-1)]))
+        return 0   
+    if event.message.text.lower().startswith('trg.')==True:
+        y=googletran(event.message.text.lower())
+        if y!=0:
+            line_bot_api.reply_message(event.reply_token,TextSendMessage(text=y))
+        return 0
 ######################################################################
     if event.message.text.lower().startswith('p-s')==True:
         [url,item]=pixivsearch(event.message.text)  
