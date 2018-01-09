@@ -436,7 +436,7 @@ def googlei(query,n):
 def youtubee(websearch,n):
     try:
         query2=urllib.parse.quote_plus(websearch)
-        c
+        if n==1:
             #url='https://www.youtube.com/results?search_query='+query2+'&gl=TW'
             url='https://www.youtube.com/results?search_query='+query2
         if n==2:
@@ -526,6 +526,10 @@ def youtubee(websearch,n):
             if index1==float("inf") and index2==float("inf"):
                 break
 
+        print(['結']+name+[len(name)]+['結'])
+        print(['結']+uploader+[len(uploader)]+['結'])
+        print(['結']+find4+[len(find4)]+['結'])
+        print(['結']+findidd+[len(findidd)]+['結'])
         return [name,uploader,find4,findidd]
     except:
         return 0
