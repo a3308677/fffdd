@@ -713,28 +713,26 @@ def handle_message(event):
     if event.message.text.lower().startswith('yt')==True:
         try:
             if event.message.text.lower()[2:].startswith('-'):
-                print(event.message.text[3:])
-                [imageurl,watchurl,title1,uploadp]=youtubee(event.message.text[3:],1)
+                [title,uploader,imageurl,watch]=youtubee(event.message.text[3:],1)
                 result=event.message.text[3:]
             if event.message.text.lower()[2:].startswith('d-'):
-                [imageurl,watchurl,title1,uploadp]=youtubee(event.message.text()[4:],2)
+                [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],2)
                 result=event.message.text[4:]
             if event.message.text.lower()[2:].startswith('p-'):
-                [imageurl,watchurl,title1,uploadp]=youtubee(event.message.text()[4:],3)
+                [title,uploader,imageurl,watch]=youtubee(event.message.text()[4:],3)
                 result=event.message.text[4:]
-            print(len(imageurl),len(watchurl),len(title1),len(uploadp))
-            print(imageurl[0],watchurl[0],title1[0],uploadp[0])
+            
             carousel_template_message = TemplateSendMessage(
                 alt_text=result+'搜尋結果',
                 template=CarouselTemplate(
                     columns=[
-                        CarouselColumn(thumbnail_image_url=imageurl[0],title=title1[0],text=uploadp[0],actions=[URITemplateAction(label='開始觀看',uri=watchurl[0])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[1],title=title1[1],text=uploadp[1],actions=[URITemplateAction(label='開始觀看',uri=watchurl[1])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[2],title=title1[2],text=uploadp[2],actions=[URITemplateAction(label='開始觀看',uri=watchurl[2])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[3],title=title1[3],text=uploadp[3],actions=[URITemplateAction(label='開始觀看',uri=watchurl[3])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[4],title=title1[4],text=uploadp[4],actions=[URITemplateAction(label='開始觀看',uri=watchurl[4])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[5],title=title1[5],text=uploadp[5],actions=[URITemplateAction(label='開始觀看',uri=watchurl[5])]),
-                        CarouselColumn(thumbnail_image_url=imageurl[6],title=title1[6],text=uploadp[6],actions=[URITemplateAction(label='開始觀看',uri=watchurl[6])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[0],title=title[0],text=uploader[0],actions=[URITemplateAction(label='開始觀看',uri=watch[0])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[1],title=title[1],text=uploader[1],actions=[URITemplateAction(label='開始觀看',uri=watch[1])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[2],title=title[2],text=uploader[2],actions=[URITemplateAction(label='開始觀看',uri=watch[2])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[3],title=title[3],text=uploader[3],actions=[URITemplateAction(label='開始觀看',uri=watch[3])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[4],title=title[4],text=uploader[4],actions=[URITemplateAction(label='開始觀看',uri=watch[4])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[5],title=title[5],text=uploader[5],actions=[URITemplateAction(label='開始觀看',uri=watch[5])]),
+                        CarouselColumn(thumbnail_image_url=imageurl[6],title=title[6],text=uploader[6],actions=[URITemplateAction(label='開始觀看',uri=watch[6])]),
                     ]
                 )
             )
