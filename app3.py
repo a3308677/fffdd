@@ -457,7 +457,7 @@ def youtubee(websearch,n):
     #headers['Referer'] = 'http://www.google.co.jp'
     #rrrrrr=np.random.choice(headerslist)
     
-    headers['Referer'] ='http://www.google.co.jp'
+    headers['Referer'] =np.random.choice(headerslist)
     req = urllib.request.Request(url, headers = headers)
     resp = urllib.request.urlopen(req) 
     content =  resp.read().decode(resp.headers.get_content_charset())
