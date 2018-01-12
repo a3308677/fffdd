@@ -981,7 +981,7 @@ def handle_message(event):
     if event.message.text.lower().startswith('225')==True:
       audio_message = AudioSendMessage(
         original_content_url='https://widget.kkbox.com/v1/?id=Pa0NfMzqWKr80xUY_N&type=song&terr=JP&lang=JA',
-        duration=240000
+        duration=30000
       )
       line_bot_api.reply_message(event.reply_token,audio_message)
       return 0
