@@ -956,11 +956,8 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token,carousel_template_message)
         return 0
-        
-        
-          
-
-    if event.message.text.lower().startswith('測')==True:
+      
+    if event.message.text.lower().startswith('測')==True: 
         carousel_template_message = TemplateSendMessage(
             alt_text='搜尋結果',
             template=CarouselTemplate(
@@ -980,6 +977,14 @@ def handle_message(event):
         )
         line_bot_api.reply_message(event.reply_token,carousel_template_message)
         return 0
+      
+    if event.message.text.lower().startswith('225')==True:
+      audio_message = AudioSendMessage(
+        original_content_url='https://widget.kkbox.com/v1/?id=9-MgtQL_F6qQ3XONso&type=song',
+        duration=240000
+      )
+      line_bot_api.reply_message(event.reply_token,audio_message)
+      return 0
     
 import os
 if __name__ == "__main__":
