@@ -31,6 +31,8 @@ import multiprocessing
 import os
 import numpy as np
 from googletrans import Translator
+from kkbox_developer_sdk.auth_flow import KKBOXOAuth
+from kkbox_developer_sdk.api import KKBOXAPI
 
 print(os.environ['PORT'])
 print(type(os.environ['PORT']))
@@ -985,7 +987,21 @@ def handle_message(event):
       )
       line_bot_api.reply_message(event.reply_token,audio_message)
       return 0
-    
+    if event.message.text.lower().startswith('215')==True:
+      CLIENT_ID = "db49815c92fde22c57d3c90bafbb37f8"
+      CLIENT_SECRET = "6ed79ebec4103a1e0da7f201d3356a80"
+      auth = KKBOXOAuth(CLIENT_ID, CLIENT_SECRET)
+      token = auth.fetch_access_token_by_client_credentials()
+
+
+      kkboxapi = KKBOXAPI(token)
+      artist_id = '8q3_xzjl89Yakn_7GB'
+      artist = kkboxapi.artist_fetcher.fetch_artist(artist_id)
+      z=kkboxapi.search_fetcher.search('lisa')
+      fin=re.findall('https://event.kkbox.com(.*?),', str(z))
+      fin2=re.findall('name(.*?),', str(z))
+      line_bot_api.reply_message(event.reply_token,TextSendMessage(text=fin[0]))
+      
 import os
 if __name__ == "__main__":
     
