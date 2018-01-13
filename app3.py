@@ -1234,11 +1234,9 @@ def handle_message(event):
               columns=[
                   ImageCarouselColumn(
                       image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
-                      action=PostbackTemplateAction(
-                          label='postback2',
-                          #text='postback text2',
-                          uri='http://example.com/2',
-                          data='action=buy&itemid=2'
+                      action=URITemplateAction(
+                          label='dddddddddd',
+                          uri='http://example.com/'
                       )
                   )
               ]
