@@ -1228,14 +1228,30 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,audio_message)
       return 0
     if event.message.text.lower().startswith('215')==True:
-      image1=[0]*5
-      
-      image1[0]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
-      image1[1]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
-      image1[2]=ImageSendMessage('https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg','https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg')
-      image1[3]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
-      image1[4]=ImageSendMessage('https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg','https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg')
-      line_bot_api.reply_message(event.reply_token,image1)        
+      buttons_template_message = TemplateSendMessage(
+          alt_text='Buttons template',
+          template=ButtonsTemplate(
+              thumbnail_image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
+              title='Menu',
+              text='Please select',
+              actions=[
+                  PostbackTemplateAction(
+                      label='postback',
+                      text='postback text',
+                      data='action=buy&itemid=1'
+                  ),
+                  MessageTemplateAction(
+                      label='message',
+                      text='message text'
+                  ),
+                  URITemplateAction(
+                      label='uri',
+                      uri='http://example.com/'
+                  )
+              ]
+          )
+      )  
+      line_bot_api.reply_message(event.reply_token,buttons_template_message)        
       
       return 0
       
