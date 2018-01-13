@@ -101,7 +101,7 @@ def output(z):
     z=str(z)
     while 'duration' in z:
         try:
-            print('對')
+           
             index1 =z.index('duration',last,len(z))
             index2 =z.rindex('name',0,index1)
             name+=[z[index2+8:index1-4]]
@@ -119,9 +119,9 @@ def output(z):
             last=index6
         except:
             break
-    print(name)
-    print(songurl)
-    print(image)
+    #print(name)
+    #print(songurl)
+    #print(image)
     return [name,songurl,image]
 
 def songview(songurl):
@@ -137,7 +137,7 @@ def output2(z):
     z=str(z)
     while 'duration' in z:
         try:
-            print('對')
+            
             index1 =z.index('duration',last,len(z))
             index2 =z.rindex('name',0,index1)
             name+=[z[index2+8:index1-4]]
@@ -147,8 +147,8 @@ def output2(z):
             last=index4
         except:
             break
-    print(name)
-    print(songurl)
+    #print(name)
+    #print(songurl)
     return [name,songurl]
 
 
@@ -170,7 +170,7 @@ def artist(z):
             last=index5
         except:
             break
-    print(len(name),len(id))
+    #print(len(name),len(id))
     name2=[]
     id2=[]
     for i in range(0,len(id)):
@@ -178,8 +178,8 @@ def artist(z):
             id2+=[id[i]]
             name2+=[name[i]]
 
-    print(name2)
-    print(id2)
+    #print(name2)
+    #print(id2)
     return [name2,id2]
 
 def getalbum(z):
@@ -213,117 +213,126 @@ def getalbum(z):
             last=index2
         except:
             break
-    print(len(name),len(id),len(image))
+    #print(len(name),len(id),len(image))
     
     return [name,id,image]    
   
 def peoplesearch(input):
-    
-    itemnum=0
-    initial=input.rindex(')')
-    keyword=input[:initial]
+  try:  
+      itemnum=0
+      initial=input.rindex(')')
+      keyword=input[:initial]
 
-    for v in input[initial+1:]:
-        if v=='.':
-            itemnum+=1
-    
-    z=kkboxapi.search_fetcher.search(keyword)
-    [name2,id2]=artist(z)
-    if itemnum==0:
-        return [name2]
-    if itemnum==1:
-        artistindex=input.index('.',initial+1,len(input))
-        artistnum=int(input[artistindex+1:])
+      for v in input[initial+1:]:
+          if v=='.':
+              itemnum+=1
 
-        z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
-        [name3,id3,image]=getalbum(z2)
-        return [name3]
-    if itemnum==2:
-        artistindex=input.index('.',initial+1,len(input))
-        artistindex2=input.rindex('.',initial+1,len(input))
-        artistnum=int(input[artistindex+1:artistindex2])
-        albumnum=int(input[artistindex2+1:])
+      z=kkboxapi.search_fetcher.search(keyword)
+      [name2,id2]=artist(z)
+      if itemnum==0:
+          return [name2]
+      if itemnum==1:
+          artistindex=input.index('.',initial+1,len(input))
+          artistnum=int(input[artistindex+1:])
 
-        z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
-        [name3,id3,image]=getalbum(z2)
-        
-        z3=kkboxapi.album_fetcher.fetch_tracks_in_album(id3[albumnum-1])
-    
-        [name4,songurl]=output2(z3)
-        return [name4]
-    if itemnum==3:
-        artistindex=input.index('.',initial+1,len(input))
-        artistindex2=input.index('.',artistindex+1,len(input))
-        artistindex3=input.rindex('.',initial+1,len(input))
+          z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
+          [name3,id3,image]=getalbum(z2)
+          return [name3]
+      if itemnum==2:
+          artistindex=input.index('.',initial+1,len(input))
+          artistindex2=input.rindex('.',initial+1,len(input))
+          artistnum=int(input[artistindex+1:artistindex2])
+          albumnum=int(input[artistindex2+1:])
 
-        artistnum=int(input[artistindex+1:artistindex2])
-        albumnum=int(input[artistindex2+1:artistindex3])
-        songnum=int(input[artistindex3+1:])
+          z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
+          [name3,id3,image]=getalbum(z2)
 
-        z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
-        [name3,id3,image]=getalbum(z2)
-        
-        z3=kkboxapi.album_fetcher.fetch_tracks_in_album(id3[albumnum-1])
-    
-        [name4,songurl]=output2(z3)
-        
-        z4=songview(songurl[songnum-1])
-        print(z4,image[albumnum-1],songurl[songnum-1],name4[songnum-1])
-        return [z4,image[albumnum-1],songurl[songnum-1],name4[songnum-1]]
+          z3=kkboxapi.album_fetcher.fetch_tracks_in_album(id3[albumnum-1])
 
+          [name4,songurl]=output2(z3)
+          return [name4]
+      if itemnum==3:
+          artistindex=input.index('.',initial+1,len(input))
+          artistindex2=input.index('.',artistindex+1,len(input))
+          artistindex3=input.rindex('.',initial+1,len(input))
+
+          artistnum=int(input[artistindex+1:artistindex2])
+          albumnum=int(input[artistindex2+1:artistindex3])
+          songnum=int(input[artistindex3+1:])
+
+          z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
+          [name3,id3,image]=getalbum(z2)
+
+          z3=kkboxapi.album_fetcher.fetch_tracks_in_album(id3[albumnum-1])
+
+          [name4,songurl]=output2(z3)
+
+          z4=songview(songurl[songnum-1])
+          #print(z4,image[albumnum-1],songurl[songnum-1],name4[songnum-1])
+          return [z4,image[albumnum-1],songurl[songnum-1],name4[songnum-1]]
+  except:
+    return 0
+  
 def hotsearch(input):
-    itemnum=0
-    initial=input.rindex(')')
-    keyword=input[:initial]
+  try:  
+      itemnum=0
+      initial=input.rindex(')')
+      keyword=input[:initial]
 
-    for v in input[initial+1:]:
-        if v=='.':
-            itemnum+=1
-    
-    z=kkboxapi.search_fetcher.search(keyword)
-    [name2,id2]=artist(z)
-    if itemnum==0:
-        return [name2]
-    if itemnum==1:
-        artindex=input.index('.',initial+1,len(input))
-        artnum=int(input[artindex+1:])
+      for v in input[initial+1:]:
+          if v=='.':
+              itemnum+=1
 
-        c=kkboxapi.artist_fetcher.fetch_top_tracks_of_artist(id2[artnum-1])
-        [name,songurl,image]=output(c)
-        return [name]
-    if itemnum==2:
-        artistindex=input.index('.',initial+1,len(input))
-        artistindex2=input.rindex('.',initial+1,len(input))
-        artistnum=int(input[artistindex+1:artistindex2])
-        songnum=int(input[artistindex2+1:])
+      z=kkboxapi.search_fetcher.search(keyword)
+      [name2,id2]=artist(z)
+      if itemnum==0:
+          return [name2]
+      if itemnum==1:
+          artindex=input.index('.',initial+1,len(input))
+          artnum=int(input[artindex+1:])
 
-        c=kkboxapi.artist_fetcher.fetch_top_tracks_of_artist(id2[artistnum-1])
-        [name,songurl,image]=output(c)
+          c=kkboxapi.artist_fetcher.fetch_top_tracks_of_artist(id2[artnum-1])
+          [name,songurl,image]=output(c)
+          return [name]
+      if itemnum==2:
+          artistindex=input.index('.',initial+1,len(input))
+          artistindex2=input.rindex('.',initial+1,len(input))
+          artistnum=int(input[artistindex+1:artistindex2])
+          songnum=int(input[artistindex2+1:])
 
-        z4=songview(songurl[songnum-1])
-        return [z4,name[songnum-1],songurl[songnum-1],image[songnum-1]]
+          c=kkboxapi.artist_fetcher.fetch_top_tracks_of_artist(id2[artistnum-1])
+          [name,songurl,image]=output(c)
 
+          z4=songview(songurl[songnum-1])
+          return [z4,name[songnum-1],songurl[songnum-1],image[songnum-1]]
+  except:
+    return 0
+  
 def songsearch(input):
-    itemnum=0
-    initial=input.rindex(')')
-    keyword=input[:initial]
+  try: 
+      itemnum=0
+      initial=input.rindex(')')
+      keyword=input[:initial]
 
-    for v in input[initial+1:]:
-        if v=='.':
-            itemnum+=1
-    
-    z=kkboxapi.search_fetcher.search(keyword)
-    [name,songurl,image]=output(z)
-    print(len(name),len(songurl),len(image))
-    if itemnum==0:
-        return [name]
-    if itemnum==1:
-        artistindex=input.index('.',initial+1,len(input))
-        artistnum=int(input[artistindex+1:])
+      for v in input[initial+1:]:
+          if v=='.':
+              itemnum+=1
+
+      z=kkboxapi.search_fetcher.search(keyword)
+      [name,songurl,image]=output(z)
+      #print(len(name),len(songurl),len(image))
+      if itemnum==0:
+          return [name]
+      if itemnum==1:
+          artistindex=input.index('.',initial+1,len(input))
+          artistnum=int(input[artistindex+1:])
+
+          z4=songview(songurl[artistnum-1])
+          #print([z4,name[artistnum-1],songurl[artistnum-1],image[artistnum-1]])
+          return [z4,name[artistnum-1],songurl[artistnum-1],image[artistnum-1]]
         
-        z4=songview(songurl[artistnum-1])
-        print([z4,name[artistnum-1],songurl[artistnum-1],image[artistnum-1]])
-        return [z4,name[artistnum-1],songurl[artistnum-1],image[artistnum-1]]
+  except:
+    return 0
 ##########################################################################
 def pixivsearch(string):
     try:   
@@ -1246,6 +1255,8 @@ def handle_message(event):
     if event.message.text.lower().startswith('kk-')==True:  
       if event.message.text.lower().startswith('kk-a('):
         x=peoplesearch(event.message.text[5:])
+        if x==0:
+          return 0
         if len(x)==1:
           x=x[0]
           text=''  
@@ -1267,6 +1278,8 @@ def handle_message(event):
         
       if event.message.text.lower().startswith('kk-h('):
         x=hotsearch(event.message.text[5:])
+        if x==0:
+          return 0
         if len(x)==1:
           x=x[0]
           text=''  
@@ -1288,6 +1301,8 @@ def handle_message(event):
         
       if event.message.text.lower().startswith('kk-s('):
         x=songsearch(event.message.text[5:])
+        if x==0:
+          return 0
         if len(x)==1:
           x=x[0]
           text=''  
