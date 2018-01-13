@@ -1229,7 +1229,7 @@ def handle_message(event):
       return 0
     if event.message.text.lower().startswith('215')==True:
       imagemap_message = ImagemapSendMessage(
-          base_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
+          base_url='https://i.ytimg.com/vi/KId6eunoiWk/hqdefault.jpg?sqp=-oaymwEXCPYBEIoBSFryq4qpAwkIARUAAIhCGAE=&rs=AOn4CLAPKDLk1rG1iUjy4fBfDvzaYR7oDQ',
           alt_text='ssssssssssss',
           base_size=BaseSize(height=1040, width=1040),
           actions=[
