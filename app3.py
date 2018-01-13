@@ -1228,26 +1228,15 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,audio_message)
       return 0
     if event.message.text.lower().startswith('215')==True:
-      imagemap_message = ImagemapSendMessage(
-          base_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
-          alt_text='ssssssssssss',
-          base_size=BaseSize(height=1040, width=1040),
-          actions=[
-              URIImagemapAction(
-                  link_uri='https://example.com/',
-                  area=ImagemapArea(
-                      x=0, y=0, width=1040, height=1040
-                  )
-              ),
-              MessageImagemapAction(
-                  text='hello',
-                  area=ImagemapArea(
-                      x=520, y=0, width=520, height=1040
-                  )
-              )
-          ]
-      )    
-      line_bot_api.reply_message(event.reply_token,imagemap_message)
+      image1=[0]*5
+      
+      image1[0]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
+      image1[1]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
+      image1[2]=ImageSendMessage('https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg','https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg')
+      image1[3]=ImageSendMessage('https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg','https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg')
+      image1[4]=ImageSendMessage('https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg','https://i.kfs.io/artist/global/209156,0v14/fit/300x300.jpg')
+      line_bot_api.reply_message(event.reply_token,image1)        
+      
       return 0
       
       
