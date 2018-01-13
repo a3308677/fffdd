@@ -1253,6 +1253,8 @@ def handle_message(event):
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
           return 0
         if len(x)==4:
+          if len(x[3])>12:
+            x[3]=x[3][0:12]
           image_carousel_template_message = TemplateSendMessage(
               alt_text='ImageCarousel template',
               template=ImageCarouselTemplate(
@@ -1272,6 +1274,8 @@ def handle_message(event):
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
           return 0
         if len(x)==4:
+          if len(x[1])>12:
+            x[1]=x[1][0:12]
           image_carousel_template_message = TemplateSendMessage(
               alt_text='ImageCarousel template',
               template=ImageCarouselTemplate(
@@ -1291,6 +1295,8 @@ def handle_message(event):
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
           return 0
         if len(x)==4:
+          if len(x[1])>12:
+            x[1]=x[1][0:12]
           image_carousel_template_message = TemplateSendMessage(
               alt_text='ImageCarousel template',
               template=ImageCarouselTemplate(
