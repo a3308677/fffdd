@@ -1237,6 +1237,7 @@ def handle_message(event):
                       action=PostbackTemplateAction(
                           label='postback2',
                           #text='postback text2',
+                          uri='http://example.com/2',
                           data='action=buy&itemid=2'
                       )
                   )
