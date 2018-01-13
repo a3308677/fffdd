@@ -1235,16 +1235,8 @@ def handle_message(event):
                   ImageCarouselColumn(
                       image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
                       action=PostbackTemplateAction(
-                          label='postback1',
-                          text='postback text1',
-                          data='action=buy&itemid=1'
-                      )
-                  ),
-                  ImageCarouselColumn(
-                      image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
-                      action=PostbackTemplateAction(
                           label='postback2',
-                          text='postback text2',
+                          #text='postback text2',
                           data='action=buy&itemid=2'
                       )
                   )
