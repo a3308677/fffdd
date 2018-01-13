@@ -1232,8 +1232,12 @@ def handle_message(event):
       image_carousel_template_message = TemplateSendMessage(
           alt_text='ImageCarousel template',
           template=ImageCarouselTemplate(
-              columns=[ImageCarouselColumn(image_url='https://i.kfs.io/album/global/30294988,0v1/fit/1000x1000.jpg',action=URITemplateAction(label='dddddddddd',uri='http://example.com/'))]
+              columns=[ImageCarouselColumn(image_url='https://i.kfs.io/album/tw/5039102,0v1/fit/1000x1000.jpg',action=URITemplateAction(label='crossing field',uri='https://event.kkbox.com/content/song/X-rLaTgL-uxShk-jpz'))]
           )
+      )
+      audio_message = AudioSendMessage(
+        original_content_url='https://fs-preview.kfs.io/201307/1NclZO0rnjwojGhc0O5YFIhfQXaXGJaDaVV_uMNbOtbTgDqSWg==?__gda__=1523650288_828569d4680f31a98ec506fe74831615',
+        duration=20000
       )
       line_bot_api.reply_message(event.reply_token,image_carousel_template_message)        
       
