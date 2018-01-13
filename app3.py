@@ -1232,7 +1232,7 @@ def handle_message(event):
       image_carousel_template_message = TemplateSendMessage(
           alt_text='ImageCarousel template',
           template=ImageCarouselTemplate(
-              columns=[ImageCarouselColumn(image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',action=URITemplateAction(label='crossing field',uri='https://event.kkbox.com/content/song/X-rLaTgL-uxShk-jpz'))]
+              columns=[ImageCarouselColumn(image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',action=URITemplateAction(label='crossing',uri='http://example.com/'))]
           )
       )
       audio_message = AudioSendMessage(
