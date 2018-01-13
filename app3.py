@@ -230,14 +230,14 @@ def peoplesearch(input):
     z=kkboxapi.search_fetcher.search(keyword)
     [name2,id2]=artist(z)
     if itemnum==0:
-        return name2
+        return [name2]
     if itemnum==1:
         artistindex=input.index('.',initial+1,len(input))
         artistnum=int(input[artistindex+1:])
 
         z2=kkboxapi.artist_fetcher.fetch_albums_of_artist(id2[artistnum-1])
         [name3,id3,image]=getalbum(z2)
-        return name3
+        return [name3]
     if itemnum==2:
         artistindex=input.index('.',initial+1,len(input))
         artistindex2=input.rindex('.',initial+1,len(input))
@@ -250,7 +250,7 @@ def peoplesearch(input):
         z3=kkboxapi.album_fetcher.fetch_tracks_in_album(id3[albumnum-1])
     
         [name4,songurl]=output2(z3)
-        return name4
+        return [name4]
     if itemnum==3:
         artistindex=input.index('.',initial+1,len(input))
         artistindex2=input.index('.',artistindex+1,len(input))
@@ -283,14 +283,14 @@ def hotsearch(input):
     z=kkboxapi.search_fetcher.search(keyword)
     [name2,id2]=artist(z)
     if itemnum==0:
-        return name2
+        return [name2]
     if itemnum==1:
         artindex=input.index('.',initial+1,len(input))
         artnum=int(input[artindex+1:])
 
         c=kkboxapi.artist_fetcher.fetch_top_tracks_of_artist(id2[artnum-1])
         [name,songurl,image]=output(c)
-        return name
+        return [name]
     if itemnum==2:
         artistindex=input.index('.',initial+1,len(input))
         artistindex2=input.rindex('.',initial+1,len(input))
@@ -316,7 +316,7 @@ def songsearch(input):
     [name,songurl,image]=output(z)
     print(len(name),len(songurl),len(image))
     if itemnum==0:
-        return name
+        return [name]
     if itemnum==1:
         artistindex=input.index('.',initial+1,len(input))
         artistnum=int(input[artistindex+1:])
@@ -1242,6 +1242,7 @@ def handle_message(event):
       if event.message.text.lower().startswith('kk-a('):
         x=peoplesearch(event.message.text[5:])
         if len(x)==1:
+          x=x[0]
           text=''  
           for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
@@ -1260,6 +1261,7 @@ def handle_message(event):
       if event.message.text.lower().startswith('kk-h('):
         x=hotsearch(event.message.text[5:])
         if len(x)==1:
+          x=x[0]
           text=''  
           for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
@@ -1278,6 +1280,7 @@ def handle_message(event):
       if event.message.text.lower().startswith('kk-s('):
         x=songsearch(event.message.text[5:])
         if len(x)==1:
+          x=x[0]
           text=''  
           for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
           line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
