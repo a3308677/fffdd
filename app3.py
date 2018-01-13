@@ -1231,22 +1231,67 @@ def handle_message(event):
       image_carousel_template_message = TemplateSendMessage(
           alt_text='ImageCarousel template',
           template=ImageCarouselTemplate(
-              columns=[
-                  ImageCarouselColumn(
-                      image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
-                      action=URITemplateAction(
-                          label='dddddddddd',
-                          uri='http://example.com/'
-                      )
-                  )
-              ]
+              columns=[ImageCarouselColumn(image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',action=URITemplateAction(label='dddddddddd',uri='http://example.com/'))]
           )
       )
       line_bot_api.reply_message(event.reply_token,image_carousel_template_message)        
       
       return 0
-      
-      
+    
+    if event.message.text.lower().startswith('kk-')==True:  
+      if event.message.text.lower().startswith('kk-a('):
+        x=peoplesearch(event.message.text[5:])
+        if len(x)==1:
+          text=''  
+          for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
+          line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
+          return 0
+        if len(x)==4:
+          image_carousel_template_message = TemplateSendMessage(
+              alt_text='ImageCarousel template',
+              template=ImageCarouselTemplate(
+                  columns=[ImageCarouselColumn(image_url=x[1],action=URITemplateAction(label=x[3],uri=x[2]))]
+              )
+          )
+          audio_message = AudioSendMessage(original_content_url=x[0],duration=30000)
+          line_bot_api.reply_message(event.reply_token,[image_carousel_template_message,audio_message])        
+          return 0
+        
+      if event.message.text.lower().startswith('kk-h('):
+        x=hotsearch(event.message.text[5:])
+        if len(x)==1:
+          text=''  
+          for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
+          line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
+          return 0
+        if len(x)==4:
+          image_carousel_template_message = TemplateSendMessage(
+              alt_text='ImageCarousel template',
+              template=ImageCarouselTemplate(
+                  columns=[ImageCarouselColumn(image_url=x[3],action=URITemplateAction(label=x[1],uri=x[2]))]
+              )
+          )
+          audio_message = AudioSendMessage(original_content_url=x[0],duration=30000)
+          line_bot_api.reply_message(event.reply_token,[image_carousel_template_message,audio_message])        
+          return 0
+        
+      if event.message.text.lower().startswith('kk-s('):
+        x=songsearch(event.message.text[5:])
+        if len(x)==1:
+          text=''  
+          for i in range(0,len(x)):text+=str(i+1)+'. '+x[i]+'\n'
+          line_bot_api.reply_message(event.reply_token,TextSendMessage(text=text[0:len(text)-1]))    
+          return 0
+        if len(x)==4:
+          image_carousel_template_message = TemplateSendMessage(
+              alt_text='ImageCarousel template',
+              template=ImageCarouselTemplate(
+                  columns=[ImageCarouselColumn(image_url=x[3],action=URITemplateAction(label=x[1],uri=x[2]))]
+              )
+          )
+          audio_message = AudioSendMessage(original_content_url=x[0],duration=30000)
+          line_bot_api.reply_message(event.reply_token,[image_carousel_template_message,audio_message])        
+          return 0
       
 import os
 if __name__ == "__main__":
