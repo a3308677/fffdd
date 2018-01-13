@@ -1228,30 +1228,30 @@ def handle_message(event):
       line_bot_api.reply_message(event.reply_token,audio_message)
       return 0
     if event.message.text.lower().startswith('215')==True:
-      buttons_template_message = TemplateSendMessage(
-          alt_text='Buttons template',
-          template=ButtonsTemplate(
-              thumbnail_image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
-              title='Menu',
-              text='Please select',
-              actions=[
-                  PostbackTemplateAction(
-                      label='postback',
-                      text='postback text',
-                      data='action=buy&itemid=1'
+      image_carousel_template_message = TemplateSendMessage(
+          alt_text='ImageCarousel template',
+          template=ImageCarouselTemplate(
+              columns=[
+                  ImageCarouselColumn(
+                      image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
+                      action=PostbackTemplateAction(
+                          label='postback1',
+                          text='postback text1',
+                          data='action=buy&itemid=1'
+                      )
                   ),
-                  MessageTemplateAction(
-                      label='message',
-                      text='message text'
-                  ),
-                  URITemplateAction(
-                      label='uri',
-                      uri='http://example.com/'
+                  ImageCarouselColumn(
+                      image_url='https://i.kfs.io/album/global/30294988,0v1/fit/500x500.jpg',
+                      action=PostbackTemplateAction(
+                          label='postback2',
+                          text='postback text2',
+                          data='action=buy&itemid=2'
+                      )
                   )
               ]
           )
-      )  
-      line_bot_api.reply_message(event.reply_token,buttons_template_message)        
+      )
+      line_bot_api.reply_message(event.reply_token,image_carousel_template_message)        
       
       return 0
       
