@@ -17,7 +17,7 @@ PyYAML==3.12
 reload==0.9
 requests==2.18.4
 selenium==3.7.0
-setuptools==28.8.0
+setuptools==65.5.1
 simplejson==3.13.2
 six==1.11.0
 urllib3==1.22
